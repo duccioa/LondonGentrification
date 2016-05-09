@@ -1,0 +1,6 @@
+This UK Data Service Census Support dataset has been supplied by the Office for National Statistics (ONS) Geography.
+Under the terms of the Open Government Licence (OGL) and UK Government Licensing Framework (launched 30 September 2010), anyone wishing to use or re-use ONS material, whether commercially or privately, may do so freely without a specific application for a licence, subject to the conditions of the OGL and the Framework. Users reproducing ONS content should include a source accreditation to ONS.
+ONS Geography produce a number of products which include the Intellectual Property Rights (IPR) of other organisations and users should be aware of third party rights and any need for licences. In these cases the appropriate attribution/copyright statements should be used.
+ONS Digital boundaries are supplied under the Open Government Licence and Ordnance Survey OpenData Licence and the following copyright statements must be used when reproducing or using this material:
+"Contains National Statistics data © Crown copyright and database right 2012
+Contains Ordnance Survey data © Crown copyright and database right 2012"

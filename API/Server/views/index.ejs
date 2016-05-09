@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>London Gentrification information page</title>
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<script src="./jquery.min.js"></script>
+<div id="container">
+	<h1>
+		FoodPremises DB API
+	</h1>
+	
+	<h2>
+	 Data Endpoints
+	</h2>
+
+	<p>
+		http://128.40.150.34:8874/data/:lat/:lon/:radius - <a href="http://128.40.150.34:8874/data/tokens_spatial/51.514756/-0.104345/50" target="_BLANK">Example</a><br/>
+		<b>Returns all the food premises inside the database with a radius (in meters) for a given lat/lng point</b>
+	</p>	
+	
+	<p>
+		http://128.40.150.34:8874/data/spatial_tokens/:BusinessID - <a href="http://128.40.150.34:8874/data/tokens_spatial/12" target="_BLANK">Example</a> <br/>
+		<b>Returns a single premise data inside our food premise database for a given business ID</b>
+ 	
+	</p>
+</div>
+</body>
+</html>

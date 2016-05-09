@@ -1,0 +1,8 @@
+Coursework server
+username : ucfnszh
+psw : vucivapesa
+database: ucfnszh
+host: 128.40.150.34
+port: 3306
+
+UCL psw: Lin0209*

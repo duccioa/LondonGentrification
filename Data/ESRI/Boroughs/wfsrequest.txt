@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:GetFeature maxFeatures="2147483647" outputFormat="SHAPE-ZIP"
+  service="WFS" version="1.0.0" xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:gml="http://www.opengis.net/gml" xmlns:wfs="http://www.opengis.net/wfs">
+  <wfs:Query typeName="ukb:england_lad_2011">
+    <ogc:Filter>
+      <ogc:Or>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000002*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000003*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000004*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000005*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000006*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000007*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000001*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000008*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000009*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000010*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000011*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000012*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000013*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000014*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000015*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000016*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000017*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000018*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000019*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000020*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000021*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000022*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000023*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000024*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000025*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000026*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000027*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000028*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000029*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000030*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000031*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000032*</ogc:Literal>
+        </ogc:PropertyIsLike>
+        <ogc:PropertyIsLike escape="!" singleChar="#" wildCard="*">
+          <ogc:PropertyName>label</ogc:PropertyName>
+          <ogc:Literal>E09000033*</ogc:Literal>
+        </ogc:PropertyIsLike>
+      </ogc:Or>
+    </ogc:Filter>
+  </wfs:Query>
+</wfs:GetFeature>

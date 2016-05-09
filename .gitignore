@@ -1,0 +1,12 @@
+
+.idea/
+
+Archive/
+
+__pycache__/
+.Rproj.user
+.RData
+.Rhistory
+Data/FoodPremises/ukpostcodes.csv
+
+Icon?
