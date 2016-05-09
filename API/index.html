@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>Workshop 9 - Flickr Discovery Tool</title>
+	<title>SDC: Food Premises</title>
 	<link rel='stylesheet' id='font-css'  href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' type='text/css' media='all' />
 	<link rel='stylesheet' id='font-css'  href='./css/style.css' type='text/css' media='all' />
 </head>
@@ -8,13 +8,13 @@
 <div id='wrapper'>
      <div id='map-canvas'></div>
      <div id="titleHeader">
-     	 <h1>FIDT: Flickr Interactive Display Tool</h1>
+     	 <h1>SDC: Food Premises</h1>
      </div>
      <div id="displayInfo">
      		<div>
-     		<h3>Display by Camera Type</h3> 
+     		<h3>Display by Word</h3> 
      		<p>
-     			<a href="#" id="iPhoneLink">iPhone</a>
+     			<a href="#" id="fried">fried</a>
      		</p>
 
      		<p>
@@ -26,7 +26,7 @@
      		</div>
      </div>
      <div id="displayWrapper">
-     		<div><span id="photoNum">0</span> photos returned</div>
+     		<div><span id="premisesNum">0</span> Premises returned</div>
      </div>
 </div>
 
@@ -57,17 +57,17 @@
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'dragend');
-			$("#photoNum").html("0");
+			$("#premisesNum").html("0");
 		});
 
-		$("#iPhoneLink").click( function(event){
+		$("#fried").click( function(event){
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'dragend');
-			$("#photoNum").html("0");
+			$("#premisesNum").html("0");
 			// --------- Call your edited getCameraData() function in here --------------------
-			getCameraData("Apple+iPhone", "blue_marker.png");
+			getCameraData("fried", "blue_marker.png");
 		});
 
 		// -------------- Put your click events here ------------------------------------------
@@ -136,7 +136,7 @@
 
       			});
 
-      			$("#photoNum").html(data.length);
+      			$("#premisesNum").html(data.length);
       			console.log("Done!");
       			
       			setAllMap(map);
@@ -152,7 +152,7 @@
 			setAllMap(null);
 			markerArray = [];
 
-			$.getJSON( "http://128.40.150.34:"+port+"/data/"+lat+"/"+lng+"/500/", function( data ) {
+			$.getJSON( "http://128.40.150.34:"+port+"/data/tokens_spatial/"+lat+"/"+lng+"/500/", function( data ) {
 				$.each(data, function(k,v){
 					
 					var latLng = new google.maps.LatLng(v.points.y, v.points.x);
@@ -162,7 +162,7 @@
 					var marker = new google.maps.Marker({
       					position: latLng, 
       					icon: "./img/icon.png",
-      					customInfo: v.pid				
+      					customInfo: v.BusinessID				
       				});
 
 					google.maps.event.addListener(marker, 'click', function(content) {
@@ -170,9 +170,8 @@
 							infowindow.setContent("");
 							
 							map.setCenter(new google.maps.LatLng(v.points.y, v.points.x));
-							$.getJSON("http://128.40.150.34:"+port+"/data/photoDescription/"+this.customInfo, function( data ) {
-								var dateTaken = new XDate((data[0].date_uploaded * 1000)).toString("MMM d, yyyy HH:mm:ss");
-								var content = "<b>Photo ID: </b>"+v.pid+"<br/> <br/><b>Description:</b><br/> "+data[0].description.replaceAll("+", " ")+" <br/> <br/><b>Date Taken: </b> "+dateTaken+" <br/><b>Camera: </b> "+data[0].device.replaceAll("+", " ")+"<br/><b>Location:</b> "+ v.points.y + ", " + v.points.x +" <br/><br/> <b>Photo</b> <br/><br/> <img src='"+data[0].download_url+"' width='300px' alt='Description'>";
+							$.getJSON("http://128.40.150.34:"+port+"/data/tokens_spatial/"+this.customInfo, function( data ) {
+								var content = "<b>Business ID: </b>"+v.BusinessID+"<br/> <br/><b>Business Name:</b><br/> "+v.BusinessName+" <br/> <br/><b>Business Type: </b> "+v.BusinessType+" <br/><b>Borough: </b> "+v.LocalAuthorityName+"<br/><b>Postcode:</b> "+ v.PostCode +" <b>Rating</b>"+v.RatingValue;
 						    	infowindow.setContent(content);
 						    });
 			
@@ -184,7 +183,7 @@
 
       			});
 
-      			$("#photoNum").html(data.length);
+      			$("#premisesNum").html(data.length);
       			
       			setAllMap(map);
 			});

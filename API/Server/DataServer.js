@@ -52,12 +52,12 @@ app.get('/data/tokens_spatial/:lat/:lon/:radius/', function (req, res) {
                 // Parse the values from the URL into numbers for the query
                 var lat = parseFloat(req.params.lat);
                 var lon = parseFloat(req.params.lon);
-                var lat_radius = parseFloat(req.params.radius);
+                var radius = parseFloat(req.params.radius);
 
 
 
                 // SQL Statement to run
-                    var sql = "SELECT * FROM photo_locations WHERE DISTANCE(points, POINT("+lon+","+lat+") ) <= " + radius;
+                    var sql = "SELECT * FROM tokens_spatial WHERE DISTANCE(points, POINT("+lon+","+lat+") ) <= " + radius;
                   //var sql = "SELECT * FROM tokens_spatial AS t WHERE t.lat >= " + lat_min + " AND t.lat <= " + lat_max + " AND t.lon >= " + lon_min + " AND t.lon <= " + lon_max + ";";  
 
                 
