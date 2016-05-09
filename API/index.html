@@ -30,6 +30,9 @@
      </div>
 </div>
 
+
+
+<!-- START the chunk to be copied and paste -->
 <!-- The Javascript from external websites gets Loaded Here -->
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization"> </script>
@@ -76,6 +79,7 @@
 		// ------------------------------------------------------------------------------------
 
 		function initialize() {
+		    
 			var mapOptions = {
 				center: new google.maps.LatLng(51.514756, -0.104345),
 				zoom: 14,
@@ -84,14 +88,19 @@
 			
 			map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-			google.maps.event.addListener(map, 'dragend', function() {
+			google.maps.event.addListener(map, 'bounds_changed', function() {
+			    var token = "cafe"
 				var bounds = map.getBounds();
+				var lat_min = bounds.getSouthWest().lat();
+				var lng_min = bounds.getSouthWest().lng();
+				var lat_max = bounds.getNorthEast().lat();
+				var lng_max = bounds.getNorthEast().lng();
+				
 				console.log("SW: " + bounds.getSouthWest() + " NE: " + bounds.getNorthEast());
 				console.log("Center: " + map.getCenter().lat() + ", " +  map.getCenter().lng());
-				getData(map.getCenter().lat(), map.getCenter().lng());
+				getData(lat_min, lng_min, lat_max, lng_max,token);
 			});
-
-			getData(map.getCenter().lat(), map.getCenter().lng());
+            
 		}
 
 		function getCameraData(cameraType, markerImg){
@@ -143,16 +152,18 @@
 			});
 		}
 
-		function getData(lat, lng){
-			var lat = lat.toFixed(2); 
-			var lng = lng.toFixed(3);
+		function getData(lat_min, lng_min, lat_max, lng_max, token){
+			var lat_min = lat_min.toFixed(2); 
+			var lng_min = lng_min.toFixed(3);
+			var lat_max = lat_max.toFixed(2); 
+			var lng_max = lng_max.toFixed(3);
 
-			console.log("Getting Data: " + lat + ", " + lng );
+			console.log("Getting Data: ((" + lat_min + ", " + lng_min + ") (" + lat_max + ", " + lng_max+ "))");
 
 			setAllMap(null);
 			markerArray = [];
 
-			$.getJSON( "http://128.40.150.34:"+port+"/data/tokens_spatial/"+lat+"/"+lng+"/500/", function( data ) {
+			$.getJSON( "http://128.40.150.34:"+port+"/data/tokens_spatial/"+lat_min+"/"+lng_min+"/"+lat_max+"/"+lng_max+"/"+token+"/", function( data ) {
 				$.each(data, function(k,v){
 					
 					var latLng = new google.maps.LatLng(v.points.y, v.points.x);
@@ -171,7 +182,7 @@
 							
 							map.setCenter(new google.maps.LatLng(v.points.y, v.points.x));
 							$.getJSON("http://128.40.150.34:"+port+"/data/tokens_spatial/"+this.customInfo, function( data ) {
-								var content = "<b>Business ID: </b>"+v.BusinessID+"<br/> <br/><b>Business Name:</b><br/> "+v.BusinessName+" <br/> <br/><b>Business Type: </b> "+v.BusinessType+" <br/><b>Borough: </b> "+v.LocalAuthorityName+"<br/><b>Postcode:</b> "+ v.PostCode +" <b>Rating</b>"+v.RatingValue;
+								var content = "<b>"+v.BusinessName+"</b>"+"<br/><br/><b>Business ID: </b>"+v.BusinessID+"<br/><b>Business Type: </b> "+v.BusinessType+" <br/><b>Borough: </b> "+v.LocalAuthorityName+"<br/><b>Postcode:</b> "+ v.PostCode +" <br/><b>Rating: </b>"+v.RatingValue;
 						    	infowindow.setContent(content);
 						    });
 			
@@ -217,5 +228,8 @@
 
 
 </script>
+<!-- END the chunk to be copied and pasted -->
+
+
 </body>
 </html>

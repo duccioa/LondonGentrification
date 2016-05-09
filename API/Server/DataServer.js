@@ -41,24 +41,26 @@ app.get('/', function(req, res) {
 
 
 //  API EndPoint to get data from specific area - /data/51.1/0.0/30 
-app.get('/data/tokens_spatial/:lat/:lon/:radius/', function (req, res) {
+app.get('/data/tokens_spatial/:lat_min/:lon_min/:lat_max/:lon_max/:token/', function (req, res) {
 
       // Alows data to be downloaded from the server with security concerns
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-WithD");
       // If all the variables are provided connect to the database
-      if(req.params.lat !== "" && req.params.lon !== "" && req.params.lat_radius !== "" && req.params.lon_radius !== ""){
+      if(req.params.lat_min !== "" && req.params.lon_min !== "" && req.params.lat_max !== "" && req.params.lon_max !== ""&& req.params.token !== ""){
                
                 // Parse the values from the URL into numbers for the query
-                var lat = parseFloat(req.params.lat);
-                var lon = parseFloat(req.params.lon);
-                var radius = parseFloat(req.params.radius);
+                var lat_min = parseFloat(req.params.lat_min);
+                var lon_min = parseFloat(req.params.lon_min);
+                var lat_max = parseFloat(req.params.lat_max);
+                var lon_max = parseFloat(req.params.lon_max);
+                var token = req.params.token;
 
 
 
                 // SQL Statement to run
-                    var sql = "SELECT * FROM tokens_spatial WHERE DISTANCE(points, POINT("+lon+","+lat+") ) <= " + radius;
-                  //var sql = "SELECT * FROM tokens_spatial AS t WHERE t.lat >= " + lat_min + " AND t.lat <= " + lat_max + " AND t.lon >= " + lon_min + " AND t.lon <= " + lon_max + ";";  
+                    //var sql = "SELECT * FROM tokens_spatial WHERE DISTANCE(points, POINT("+lon+","+lat+") ) <= " + radius;
+                  var sql = "SELECT * FROM tokens_spatial AS t WHERE t.lat >= " + lat_min + " AND t.lat <= " + lat_max + " AND t.lon >= " + lon_min + " AND t.lon <= " + lon_max + "AND t.Token IN (\""+token+"\");";  
 
                 
                 // Log it on the screen for debugging
