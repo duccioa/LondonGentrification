@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-//  FlickrData API Server
-//  Author:  Steven Gray
+//  Food Premises API Server
+//  Author:  Adapted from original code by Steven Gray
 //  Description:  This API connects to a database containing food premises in London and visualises them on a map with the possibility of filtering the premises' names by the words they contains
 
 //  Notes:        This API assumes you have an SQL function called DISTANCE defined which can be created by running the following query in MySQL:
@@ -54,7 +54,7 @@ app.get('/data/tokens_spatial/:lat_min/:lon_min/:lat_max/:lon_max/:token/', func
                 var lon_min = parseFloat(req.params.lon_min);
                 var lat_max = parseFloat(req.params.lat_max);
                 var lon_max = parseFloat(req.params.lon_max);
-                var token = req.params.token;
+                var token = req.params.token
 
 
 
@@ -104,28 +104,7 @@ app.get('/data/tokens_spatial/:BusinessID', function (req, res) {
                 res.send("");
         }
 });
-// API Endpoint to get data for specific device from database - /data/cameraType/[device]
-app.get('/data/cameraType/:device', function (req, res) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "X-Requested-WithD");
-      if(req.params.device !== ""){
-                var device = String(req.params.device);
-            
-                var sql = "select a.pid,a.lat,a.lon,a.points from photo_locations as a join metadata as b ON a.pid = b.pid where b.device like \""+device+"%\""; 
 
-                console.log(sql);
-                connection.query(sql, function(err, rows, fields) {
-                        if (err) console.log("Err:" + err);
-                        if(rows !== undefined){
-                                res.send(rows);
-                        }else{
-                                res.send("");
-                        }
-                });
-        }else{
-                res.send("");
-        }
-});
 
 // Setup the server and print a string to the screen when server is ready
 var server = app.listen(portNumber, function () {
@@ -158,3 +137,16 @@ function mysql_real_escape_string (str) {
         }
     });
 }
+
+process.on('SIGINT', function() {
+
+    console.log("Caught interrupt signal");
+
+    connection.destroy()
+
+    process.exit();
+
+});
+
+
+

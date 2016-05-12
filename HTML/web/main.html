@@ -4,9 +4,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<title>London Gentrification</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/style1.css" />
 		<script type="text/javascript"  src="js/effect.js"></script>
 		<script type="text/javascript"  src="js/mystyle.js"></script>
 		<script type='text/javascript' src='./js/mapstyle.js'></script>
+		<script type="text/javascript" src="js/modernizr.custom.29473.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/jskey=AIzaSyC_SVnN-Zpb2jJfHkgIn-uQaYSNQVeGM90&sensor=false"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true"> </script>
@@ -61,7 +63,7 @@
 			$("#premisesNum").html("0");
 		});
 
-		$("#fried").click( function(event){
+		$("#selector").click( function(event){
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
@@ -289,7 +291,28 @@
 		</div>
 		
 		<div id="filtermenu" class="fmenu">
-		<p>xxxxxxxxxxxxxxxxx</p>
+           <div id="">Words</h2>
+		   
+		   <h3>Visualization</h3>
+
+		   
+		   <h4>Borough</h4>
+
+           </div>		   
+          
+		
+		
+		
+		<!--
+		<div id="words" class="selectWords">
+		    <input type="checkbox" id="word1" name="fried" >fried
+			<input type="checkbox" id="word2" name="chicken">chicken
+		</div>
+		<button id="select"  class="selector" type = "button"
+        onclick = "showResults()">
+        Submit 
+        </button>
+		-->
 		</div>
 		
 		

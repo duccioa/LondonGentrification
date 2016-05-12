@@ -211,6 +211,7 @@ h1{
 
 
 .fmenu{
+	font-size:18px;
 	background-color: #ffffff;
     border: 1px solid grey;
     opacity: 0.6;
@@ -242,3 +243,5 @@ h1{
 	z-index:1;
 	display:none;
 }
+
+

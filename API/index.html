@@ -35,7 +35,7 @@
 <!-- START the chunk to be copied and paste -->
 <!-- The Javascript from external websites gets Loaded Here -->
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization"> </script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpXEKSVGbwdXnyk3WRE3c2g_nl2g9rhPM&libraries=visualization"> </script>
 <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
 <script type='text/javascript' src='./js/mapStyle.js'></script>
 
@@ -82,14 +82,23 @@
 		    
 			var mapOptions = {
 				center: new google.maps.LatLng(51.514756, -0.104345),
-				zoom: 14,
-			 	styles: darkMap
+				zoom: 10,
+			 	styles: greyMap
 			};
 			
 			map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            // Load London Wards
+              map.data.loadGeoJson('data/geo/London_Ward_CityMerged_WGS84.geojson');
+            
+              // Set the stroke width, and fill color for each polygon
+              map.data.setStyle({
+                fillColor: 'black',
+                strokeWeight: 0.5,
+                clickable: true
+              });
 
 			google.maps.event.addListener(map, 'bounds_changed', function() {
-			    var token = "cafe"
+			    var token = "cafe" // This is used for the moment to speedup debugging
 				var bounds = map.getBounds();
 				var lat_min = bounds.getSouthWest().lat();
 				var lng_min = bounds.getSouthWest().lng();
@@ -101,55 +110,6 @@
 				getData(lat_min, lng_min, lat_max, lng_max,token);
 			});
             
-		}
-
-		function getCameraData(cameraType, markerImg){
-			console.log("Getting Data: " + cameraType + ", with Image: " + markerImg );
-
-			setAllMap(null);
-			markerArray = [];
-
-			var url = "http://128.40.150.34:"+port+"/data/cameraType/"+cameraType;
-			console.log(url);
-			console.log("Started ...");
-
-			$.getJSON( url, function( data ) {
-				$.each(data, function(k,v){
-					
-					var latLng = new google.maps.LatLng(v.points.y, v.points.x);
-					
-					dataArray.push(latLng);
-					
-					var marker = new google.maps.Marker({
-      					position: latLng, 
-      					icon: "./img/" + markerImg,
-      					customInfo: v.pid				
-      				});
-
-					google.maps.event.addListener(marker, 'click', function(content) {
-						return function(){
-							infowindow.setContent("");
-							
-							map.setCenter(new google.maps.LatLng(v.points.y, v.points.x));
-							$.getJSON("http://128.40.150.34:"+port+"/data/photoDescription/"+this.customInfo, function( data ) {
-								var dateTaken = new XDate((data[0].date_uploaded * 1000)).toString("MMM d, yyyy HH:mm:ss");
-								var content = "<b>Photo ID: </b>"+v.pid+"<br/> <br/><b>Description:</b><br/> "+data[0].description.replaceAll("+", " ")+" <br/> <br/><b>Date Taken: </b> "+dateTaken+" <br/><b>Camera: </b> "+data[0].device.replaceAll("+", " ")+"<br/><b>Location:</b> "+ v.points.y + ", " + v.points.x +" <br/><br/> <b>Photo</b> <br/><br/> <img src='"+data[0].download_url+"' width='300px' alt='Description'>";
-						    	infowindow.setContent(content);
-						    });
-			
-						    infowindow.open(map,this);
-						}
-					}(""));
-
-					markerArray.push(marker);
-
-      			});
-
-      			$("#premisesNum").html(data.length);
-      			console.log("Done!");
-      			
-      			setAllMap(map);
-			});
 		}
 
 		function getData(lat_min, lng_min, lat_max, lng_max, token){

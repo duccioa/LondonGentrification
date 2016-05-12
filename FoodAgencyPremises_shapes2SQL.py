@@ -1,3 +1,4 @@
+# Export shapefiles to a geometry format compatible with the SQL database
 import pandas as pd
 from mpl_toolkits.basemap import Basemap #for mapping
 import fiona #for reading shapefiles
