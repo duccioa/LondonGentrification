@@ -54,3 +54,58 @@ ADD COLUMN points GEOMETRY NULL AFTER lon;
 
 UPDATE tokens_spatial 
 SET points = Point(lon, lat);
+
+
+
+CREATE TABLE `spatial_tokens_ward` (
+  `index` BIGINT(11) NOT NULL,
+  `BusinessID` BIGINT(11) NULL,
+  `BusinessName` VARCHAR(255) NULL,
+  `BusinessType` VARCHAR(255) NULL,
+  `BusinessTypeID` BIGINT(11) NULL,
+  `ConfidenceInManagement` FLOAT NULL,
+  `Hygiene` FLOAT NULL,
+  `LocalAuthorityCode` VARCHAR(255) NULL,
+  `LocalAuthorityName` VARCHAR(255) NULL,
+  `PostCode` VARCHAR(255) NULL,
+  `RatingValue` INT NULL,
+  `Structural` FLOAT NULL,
+  `Token` VARCHAR(255) NULL,
+  `lat` FLOAT NULL,
+  `lon` FLOAT NULL,
+  `geometry` POINT NULL,
+  `Matching_Wards` BIGINT(11) NULL,
+  `Ward_Name` VARCHAR(255) NULL,
+  `Median_Income_2012_13` BIGINT(11) NULL,
+  `Income_Category` VARCHAR(255) NULL,
+  `Income_Colour` VARCHAR(255) NULL,
+  `Position` BIGINT(11) NULL,
+  `cafe` INT NULL,
+  `coffee` INT NULL,
+  `pizza` INT NULL,
+  `wine` INT NULL,
+  `sushi` INT NULL,
+  `thai` INT NULL,
+  `chicken` INT NULL,
+  `fried` INT NULL,
+  `fish` INT NULL,
+  `kebab` INT NULL,
+  `costcutter` INT NULL,
+  `waitrose` INT NULL,
+  `sainsburys` INT NULL,
+  `Ward_Code` VARCHAR(255) NULL,
+  PRIMARY KEY (`index`))
+ENGINE = InnoDB;
+ALTER TABLE `spatial_tokens_ward` 
+CHANGE COLUMN `geometry` `geometry` GEOMETRY NULL DEFAULT NULL ;
+
+ALTER TABLE `ucfnszh`.`spatial_tokens_ward` 
+CHANGE COLUMN `geometry` `geometry` VARCHAR(255) NULL DEFAULT NULL ;
+
+
+load data local infile '/Users/liulinlin/Desktop/spatial_tokens_ward.csv' 
+into table spatial_tokens_ward fields terminated by ',' enclosed by '"' lines terminated by '\n' ignore 1 lines;
+
+
+
+
