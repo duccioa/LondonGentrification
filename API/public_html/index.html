@@ -3,34 +3,60 @@
 	<title>SDC: Food Premises</title>
 	<link rel='stylesheet' id='font-css'  href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' type='text/css' media='all' />
 	<link rel='stylesheet' id='font-css'  href='./css/style.css' type='text/css' media='all' />
-	<link rel='stylesheet' href='./css/style1.css' type='text/css' media='all'/>
-	
-	<!-- The Javascript from external websites gets Loaded Here -->
+	<link rel='stylesheet' href="./css/style1.css" type='text/css' media='all'/>
+</head>
+<body>
+<div id='wrapper'>
+     <div id='map-canvas'></div>
+     <div id="titleHeader">
+     	 <h1>SDC: Food Premises</h1>
+     </div>
+     <div id="displayInfo">
+     		<div>
+     		<h3>Display by Token</h3> 
+     		<p>
+     			<a href="#" id="fried">fried</a>
+     		</p>
+
+     		<p>
+     			<small>
+     				<a href="#" id="resetLink">Reset Map</a>
+     				<a href="#" id="clearLink" class="right">Clear all Markers</a>
+     			</small>
+     		</p>
+     		</div>
+     </div>
+     <div id="displayWrapper">
+     		<div><span id="premisesNum">0</span> Premises returned</div>
+     </div>
+</div>
+
+<!-- The Javascript from external websites gets Loaded Here -->
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpXEKSVGbwdXnyk3WRE3c2g_nl2g9rhPM&libraries=visualization"> </script>
 <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
 <script type='text/javascript' src='./js/mapStyle.js'></script>
-<script type='text/javascript' src='./js/effect.js'></script>
-<script type='text/javascript' src='./js/modernizr_custom_29473.js'></script>
-<script type='text/javascript' src='./js/filter.js'></script>
 
-        <style>
-		html, body {
-        height: 100%;
-        margin:0;
-        padding: 0;
-        }
-		</style>
-</head>
-
-<body>
+<!-- The Javascript gets loaded here -->
 <script type="text/javascript">
-	var map;
+    var map;
 	var markerArray = [];
 	var dataArray = [];
 	var infowindow = new google.maps.InfoWindow({maxWidth: 300});
-
-	var port = 8874;
+	var port = 8866;
+	console.log('1.GET_JGEOJSON_DATA: Create variables');//DEBUG
+    var GSS_code = [];
+    var WardName = [];
+    var BoroughName = [];
+    var MedianIncome_2012_13 = [];
+    var IncomeLabel = [];
+    var Area_Km2 = [];
+    var geometry = [];
+    var MedianIncome_col = [];
+	
+	
+	
+	
 
 	$(document).ready(function() {
 		// Register Click events 
@@ -69,28 +95,62 @@
 				zoom: 10,
 			 	styles: greyMap
 			};
-			
+			console.log('Initialise map');
 			map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             // Load ward shapes
+            
             $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
-                    //var GSS_code = [];
-                    //var GSS_code = [];
+                    //console.log('2.GET_JGEOJSON_DATA: load geojson'); DEBUG  
                     geojson = JSON.parse(data);
-                    //$.each(geojson.features, function(k,v){
-                    });
+                    for (var i = 0; i < geojson.features.length; i++){
+                    console.log('3. Index' + i + '. GET_JGEOJSON_DATA: push array');
+                    GSS_code.push(geojson.features[i].properties.GSS_code);
+                    WardName.push(geojson.features[i].properties.WardName);
+                    BoroughName.push(geojson.features[i].properties.BoroughName);
+                    MedianIncome_2012_13.push(geojson.features[i].properties.MedianIncome_2012_13);
+                    IncomeLabel.push(geojson.features[i].properties.IncomeLabel);
+                    Area_Km2.push(geojson.features[i].properties.Area_Km2);
+                    MedianIncome_col.push(geojson.features[i].properties.MedianIncome_col);
+                    };
+                });
+            //console.log('Load geoJson as a map layer');
             map.data.loadGeoJson('data/geo/London_Ward_CityMerged_WGS84.geojson');
+            //console.log('Define geoJson properties');
+            //map.data.setStyle({
+            //        fillColor: MedianIncome_col,
+            //        strokeWeight: 1
+            //      });
+
+            
+            
+            //map.data.setStyle(styleFeature);
+             //       function styleFeature(feature){
+                        //var outlineWeight = 0.5, zIndex = 1;
+                      //if (feature.getProperty('GSS_code') === 'hover') {
+                        //outlineWeight = zIndex = 2;
+                      //}
+
+               //         return {
+                 //               strokeWeight: 0.5,
+                 //             strokeColor: '#fff',
+                 //               zIndex: 1,
+                 //               fillColor: MedianIncome_col,
+                 //               fillOpacity: 0.75
+                 //             };
+
+                //    }
             // Set the stroke width, and fill color for each polygon
-              map.data.setStyle({
-                fillColor: 'black',
-                strokeWeight: 0.1
-              });
+              //map.data.setStyle({
+                //fillColor: 'black',
+                //strokeWeight: 0.1
+              //});
             //test = geojson.responseJSON.features[0]['properties']['GSS_code'];//DEBUG
 		    setupTokenMap('cafe');// Setup the page at the opening of the page
 		}  
 function setupTokenMap(token){ 
-                console.log(token);
+                console.log('setupTokenMap: ' + token);
     			google.maps.event.addListener(map, 'bounds_changed', function() {
-    			    console.log(token);
+    			    console.log('add listener: ' + token);
     				var bounds = map.getBounds();
     				var lat_min = bounds.getSouthWest().lat();
     				var lng_min = bounds.getSouthWest().lng();
@@ -180,67 +240,8 @@ function setupTokenMap(token){
 
 	String.prototype.replaceAll = function(str1, str2, ignore) {
     	return decodeURIComponent( this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2) );
-	} 
-
-
+	};
+	
 </script>
-
-<div id="map" class="googlemap"></div>
-
-
-		<!--sidebar-->
-	    <div id="sidebar" class="bar" style="text-align:left;">
-		<h1>London Gentrification</h1>
-		<input name="button1" type="button" value="Description"; class="button description" onclick=button1();>
-        <input name="button2" type="button" value="Methodology"; class="button methodology" onclick=button2();>
-		<input name="button3" type="button" value="Graphs"; class="button graphs" onclick=button3();>
-        <input name="button4" type="button" value="Data Sources"; class="button data" onclick=button4();>
-
-		</div>
-		
-		<!--button description slideToggle-->
-		<div id="content1"class="desContent">
-	    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-        </div>
-		<div id="content2"class="methodContent">
-	    <p>ssssssssssssssssssssssssssssssssss</p>
-        </div>
-		<div id="content3"class="graphsContent">
-	    <p>fffffffffffffffffffffffff</p>
-        </div>
-		<div id="content4"class="dataContent">
-	    <p>hhhhhhhhhhhhhhhhhhhhhhhhh</p>
-        </div>
-		
-		<!--filterbar-->
-		<div id="filterbar" class="rightbar" >
-           <button  class="filters"  onclick=filterclick();>F</br>I</br>L</br>T</br>E</br>R</button>
-		   <button id="plotbtn" class="plots"  onclick=plotclick();>P</br>L</br>O</br>T</br>S</button>
-		</div>
-		
-		<div id="filtermenu" class="fmenu">
-         
-		   <a href="#" id="cafe">cafe</a>
-           <a href="#" id="coffee">coffee</a>
-           <a href="#" id="pizza">pizza</a>
-           <a href="#" id="grill">grill</a>
-           <a href="#" id="wine">wine</a>
-           </div>		     
-		</div>
-		
-		
-		
-		<!--plotbar-->
-		<div id="plottab" class="ptab">
-		
-	       <div id="describeWords" class="dWords">
-		   <p>ffffffffffffffffffffffffffvvdssseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvvvvvttttttttttttttttttttttttttttttttttttttttttttttttttttttttvvv</p>
-		   </div>
-		  <div id="plotgraph" class="pgraph">
-		  <img src="./img/downloaded_test.jpg"  style="width:50%;height:95%;float:right">
-		  </div>
-		</div>
-
-
 </body>
 </html>

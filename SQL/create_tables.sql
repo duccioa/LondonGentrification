@@ -56,7 +56,7 @@ UPDATE tokens_spatial
 SET points = Point(lon, lat);
 
 
-
+#CREATE SPATAL_TOKENS__WARD TABLE'
 CREATE TABLE `spatial_tokens_ward` (
   `index` BIGINT(11) NOT NULL,
   `BusinessID` BIGINT(11) NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `spatial_tokens_ward` (
   `Token` VARCHAR(255) NULL,
   `lat` FLOAT NULL,
   `lon` FLOAT NULL,
-  `geometry` POINT NULL,
+  `geometry` VARCHAR(255) NULL,
   `Matching_Wards` BIGINT(11) NULL,
   `Ward_Name` VARCHAR(255) NULL,
   `Median_Income_2012_13` BIGINT(11) NULL,
@@ -96,14 +96,9 @@ CREATE TABLE `spatial_tokens_ward` (
   `Ward_Code` VARCHAR(255) NULL,
   PRIMARY KEY (`index`))
 ENGINE = InnoDB;
-ALTER TABLE `spatial_tokens_ward` 
-CHANGE COLUMN `geometry` `geometry` GEOMETRY NULL DEFAULT NULL ;
 
-ALTER TABLE `ucfnszh`.`spatial_tokens_ward` 
-CHANGE COLUMN `geometry` `geometry` VARCHAR(255) NULL DEFAULT NULL ;
-
-
-load data local infile '/Users/liulinlin/Desktop/spatial_tokens_ward.csv' 
+#LOAD CSV INTO THE SPATIAL_TOKENS_WARD TABLE
+load data local infile '/Users/duccioa/CLOUD/C07_UCL_SmartCities/04_SpatialDataCapture/00_Coursework/LondonGentrification/Data/spatial_tokens_ward.csv' 
 into table spatial_tokens_ward fields terminated by ',' enclosed by '"' lines terminated by '\n' ignore 1 lines;
 
 

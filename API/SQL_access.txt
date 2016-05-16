@@ -1,0 +1,5 @@
+username : ucfndai
+psw : cefevodayo
+database: ucfndai
+host: 128.40.150.34
+port: 8874
