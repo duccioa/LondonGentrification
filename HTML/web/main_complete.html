@@ -111,7 +111,100 @@
 			console.log('Setup the filter to ' + token);
 			setupTokenMap('grill');
 		});
-
+		
+		$("#sushi").click( function(event){
+			token = 'sushi';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('sushi');
+		});
+		
+		$("#thai").click( function(event){
+			token = 'thai';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('thai');
+		});
+		
+		$("#chicken").click( function(event){
+			token = 'chicken';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('chicken');
+		});
+		
+		$("#fried").click( function(event){
+			token = 'fried';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('fried');
+		});
+		$("#fish").click( function(event){
+			token = 'fish';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('fish');
+		});
+		$("#kebab").click( function(event){
+			token = 'kebab';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('kebab');
+		});
+         $("#waitrose").click( function(event){
+			token = 'waitrose';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('waitrose');
+		});
+		$("#sainsbury").click( function(event){
+			token = 'sainsbury';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('sainsbury');
+		});
+		$("#tesco").click( function(event){
+			token = 'tesco';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token);
+			setupTokenMap('tesco');
+		});
 		// -------------- Put your click events here ------------------------------------------
 
 
@@ -122,7 +215,7 @@
 			var mapOptions = {
 				center: new google.maps.LatLng(51.514756, -0.104345),
 				zoom: 10,
-			 	styles: blackMap
+			 	styles: greyMap
 			};
 			
 			map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -278,26 +371,113 @@
 		</div>
 		
 		<div id="filtermenu" class="fmenu">
-         
-		   <a href="#" id="cafe">cafe</a>
-           <a href="#" id="coffee">coffee</a>
-           <a href="#" id="pizza">pizza</a>
-           <a href="#" id="grill">grill</a>
-           <a href="#" id="wine">wine</a>
-           </div>		     
-		</div>
+           <p>Tokens</p>
+		   
+		   <table class="tokens">
+		   <tr>
+           <td><button><a href="#" id="cafe">Cafe</a></button></td>
+           <td><button><a href="#" id="coffee">Coffee</a></button></td>
+		   </tr>
+		   
+		   <tr>
+           <td><button><a href="#" id="pizza">Pizza</a></button></td>
+           <td><button><a href="#" id="grill">Grill</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="wine">Wine</a></button></td>
+		   <td><button><a href="#" id="sushi">Sushi</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="thai">Thai</a></button></td>
+		   <td><button><a href="#" id="chicken">Chicken</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="fried">Fried</a></button></td>
+		   <td><button><a href="#" id="fish">Fish</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="kebab">Kebab</a></button></td>
+		   <td><button><a href="#" id="waitrose">Waitrose</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="sainsburys">Sainsburys</a></button></td>
+		   <td><button><a href="#" id="tesco">Tesco</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="costcutter">Costcutter</a></button></td>
+		   </tr>
+		   </table>
+		   
+		   <p>Visualization</p>
+		   <table class="visualization">
+		   <tr>
+		   <td><button><a href="#" id="scatter">Scatter</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="localquotation">Location Quotation</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="localmorans">Local Moran's I</a></button></td>
+		   </tr>
+		   
+		   <tr>
+		   <td><button><a href="#" id="gwr">GWR</a></button></td>
+		   </tr>
+           </table>
+		   
+		   <table class="clearbutton">
+		   <tr>
+		   <td><button><a href="#" id="clear">Clear All</a></button></td>
+		   </tr>
+		   </table>
+           </div>
+		   
+		 
 		
 		
 		
 		<!--plotbar-->
 		<div id="plottab" class="ptab">
-		
 	       <div id="describeWords" class="dWords">
 		   <p>ffffffffffffffffffffffffffvvdssseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvvvvvttttttttttttttttttttttttttttttttttttttttttttttttttttttttvvv</p>
 		   </div>
-		  <div id="plotgraph" class="pgraph">
-		  <img src="img/downloadedImage.jpg"  style="width:50%;height:95%;float:right">
+		   
+		   <div id="plotgraph" class="pgraph" >
+		   
+		  <img class="plot1"  src="img/downloadedImage.jpg"  style="width:100%;height:100%;padding-top:5px;padding-right:5px;">
+		  <img class="plot1"  src="img/TOTALtu.jpg"  style="width:100%;height:100%;padding-top:5px;padding-right:5px;">
+
+          <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
+          <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">❯</a> 
 		  </div>
-		</div>
+		  </div>
+		
+		<script>
+          var slideIndex = 1;
+          showDivs(slideIndex);
+
+          function plusDivs(n) {
+          showDivs(slideIndex += n);
+          }
+
+          function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("plot1");
+          if (n > x.length) {slideIndex = 1}    
+          if (n < 1) {slideIndex = x.length} ;
+          for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";  
+          }
+          x[slideIndex-1].style.display = "block";  
+          }
+          </script>	
 	</body>
 	</html>

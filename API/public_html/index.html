@@ -93,7 +93,7 @@
 			var mapOptions = {
 				center: new google.maps.LatLng(51.514756, -0.104345),
 				zoom: 10,
-			 	styles: greyMap
+			 	styles: darkMap
 			};
 			console.log('Initialise map');
 			map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -102,19 +102,20 @@
             $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
                     //console.log('2.GET_JGEOJSON_DATA: load geojson'); DEBUG  
                     geojson = JSON.parse(data);
-                    for (var i = 0; i < geojson.features.length; i++){
-                    console.log('3. Index' + i + '. GET_JGEOJSON_DATA: push array');
-                    GSS_code.push(geojson.features[i].properties.GSS_code);
-                    WardName.push(geojson.features[i].properties.WardName);
-                    BoroughName.push(geojson.features[i].properties.BoroughName);
-                    MedianIncome_2012_13.push(geojson.features[i].properties.MedianIncome_2012_13);
-                    IncomeLabel.push(geojson.features[i].properties.IncomeLabel);
-                    Area_Km2.push(geojson.features[i].properties.Area_Km2);
-                    MedianIncome_col.push(geojson.features[i].properties.MedianIncome_col);
-                    };
+                    drawPolys(geojson, 'MedianIncome_col');
+                    //for (var i = 0; i < geojson.features.length; i++){
+                    //console.log('3. Index' + i + '. GET_JGEOJSON_DATA: push array');
+                    //GSS_code.push(geojson.features[i].properties.GSS_code);
+                    //WardName.push(geojson.features[i].properties.WardName);
+                    //BoroughName.push(geojson.features[i].properties.BoroughName);
+                    //MedianIncome_2012_13.push(geojson.features[i].properties.MedianIncome_2012_13);
+                    //IncomeLabel.push(geojson.features[i].properties.IncomeLabel);
+                    //Area_Km2.push(geojson.features[i].properties.Area_Km2);
+                    //MedianIncome_col.push(geojson.features[i].properties.MedianIncome_col);
+                    //};
                 });
             //console.log('Load geoJson as a map layer');
-            map.data.loadGeoJson('data/geo/London_Ward_CityMerged_WGS84.geojson');
+            //map.data.loadGeoJson('data/geo/London_Ward_CityMerged_WGS84.geojson');
             //console.log('Define geoJson properties');
             //map.data.setStyle({
             //        fillColor: MedianIncome_col,
@@ -147,6 +148,28 @@
             //test = geojson.responseJSON.features[0]['properties']['GSS_code'];//DEBUG
 		    setupTokenMap('cafe');// Setup the page at the opening of the page
 		}  
+function drawPolys(data, viz) {
+    for (var i =0; i < data.features.length; i++) {
+    // collect polygon points  
+    var polyPath = [];
+    var colour = 'geojson.features[i].properties.'+viz;
+        for (var p =0; p < data.features[i].geometry.coordinates[0].length; p++) {
+        polyPath.push(new google.maps.LatLng(data.features[i].geometry.coordinates[0][p][1],data.features[i].geometry.coordinates[0][p][0]));
+        }
+        var poly = new google.maps.Polygon({
+            paths: polyPath,
+            strokeColor: "grey",
+            strokeOpacity: 0.7,
+            strokeWeight: 0.2,
+            fillColor: eval(colour),
+            fillOpacity: 0.5,
+            map: map
+            });
+        }
+        
+    }		
+		
+
 function setupTokenMap(token){ 
                 console.log('setupTokenMap: ' + token);
     			google.maps.event.addListener(map, 'bounds_changed', function() {
@@ -187,7 +210,7 @@ function setupTokenMap(token){
 					
 					var marker = new google.maps.Marker({
       					position: latLng, 
-      					icon: "./img/icon.png",
+      					icon: "./img/icon_" + token + '.png',
       					customInfo: v.BusinessID				
       				});
 
