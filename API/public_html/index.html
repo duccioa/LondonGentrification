@@ -75,13 +75,14 @@
 
 		$("#fried").click( function(event){
 			token = 'fried';
+			viz = 'MedianIncome_col';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('fried');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
 		});
 
 		// -------------- Put your click events here ------------------------------------------
@@ -90,6 +91,8 @@
 		// ------------------------------------------------------------------------------------
 
 		function initialize() {
+		    token = 'cafe'; // first page shows results for cafe
+		    viz = 'MedianIncome_col'; //first page shows scatter plot of premises
 			var mapOptions = {
 				center: new google.maps.LatLng(51.514756, -0.104345),
 				zoom: 10,
@@ -102,53 +105,12 @@
             $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
                     //console.log('2.GET_JGEOJSON_DATA: load geojson'); DEBUG  
                     geojson = JSON.parse(data);
-                    drawPolys(geojson, 'MedianIncome_col');
-                    //for (var i = 0; i < geojson.features.length; i++){
-                    //console.log('3. Index' + i + '. GET_JGEOJSON_DATA: push array');
-                    //GSS_code.push(geojson.features[i].properties.GSS_code);
-                    //WardName.push(geojson.features[i].properties.WardName);
-                    //BoroughName.push(geojson.features[i].properties.BoroughName);
-                    //MedianIncome_2012_13.push(geojson.features[i].properties.MedianIncome_2012_13);
-                    //IncomeLabel.push(geojson.features[i].properties.IncomeLabel);
-                    //Area_Km2.push(geojson.features[i].properties.Area_Km2);
-                    //MedianIncome_col.push(geojson.features[i].properties.MedianIncome_col);
-                    //};
+                    drawPolys(geojson, viz);
+                    
                 });
-            //console.log('Load geoJson as a map layer');
-            //map.data.loadGeoJson('data/geo/London_Ward_CityMerged_WGS84.geojson');
-            //console.log('Define geoJson properties');
-            //map.data.setStyle({
-            //        fillColor: MedianIncome_col,
-            //        strokeWeight: 1
-            //      });
-
-            
-            
-            //map.data.setStyle(styleFeature);
-             //       function styleFeature(feature){
-                        //var outlineWeight = 0.5, zIndex = 1;
-                      //if (feature.getProperty('GSS_code') === 'hover') {
-                        //outlineWeight = zIndex = 2;
-                      //}
-
-               //         return {
-                 //               strokeWeight: 0.5,
-                 //             strokeColor: '#fff',
-                 //               zIndex: 1,
-                 //               fillColor: MedianIncome_col,
-                 //               fillOpacity: 0.75
-                 //             };
-
-                //    }
-            // Set the stroke width, and fill color for each polygon
-              //map.data.setStyle({
-                //fillColor: 'black',
-                //strokeWeight: 0.1
-              //});
-            //test = geojson.responseJSON.features[0]['properties']['GSS_code'];//DEBUG
-		    setupTokenMap('cafe');// Setup the page at the opening of the page
+		    setupTokenMap(token);// Setup the page at the opening of the page
 		}  
-function drawPolys(data, viz) {
+function drawPolys(data, viz) { // Specify geojson and the column associated with the colours of the visualisation
     for (var i =0; i < data.features.length; i++) {
     // collect polygon points  
     var polyPath = [];
@@ -172,8 +134,8 @@ function drawPolys(data, viz) {
 
 function setupTokenMap(token){ 
                 console.log('setupTokenMap: ' + token);
+    			if(token !== null){
     			google.maps.event.addListener(map, 'bounds_changed', function() {
-    			    console.log('add listener: ' + token);
     				var bounds = map.getBounds();
     				var lat_min = bounds.getSouthWest().lat();
     				var lng_min = bounds.getSouthWest().lng();
@@ -183,7 +145,8 @@ function setupTokenMap(token){
     				console.log("SW: " + bounds.getSouthWest() + " NE: " + bounds.getNorthEast());
     				console.log("Center: " + map.getCenter().lat() + ", " +  map.getCenter().lng());
     				getData(lat_min, lng_min, lat_max, lng_max,token);
-			});
+			})}
+			else {console.log('No scatterplot')}
 		}
 
 

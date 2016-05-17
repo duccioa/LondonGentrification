@@ -63,13 +63,13 @@ h1{
 
 .desContent{
 	background-color: #ffffff;
-    border: 1px solid grey;
-    opacity: 0.6;
+    border: none;
+    opacity: 0.8;
 	color: black;
-    filter: alpha(opacity=60); 
+    filter: alpha(opacity=80); 
 	margin-left:10%;
 	margin-top: 0px;
-	width:300px;
+	width:1210px;
 	height:100%;
 	position:fixed;
 	z-index:1;
@@ -90,12 +90,12 @@ h1{
 .methodContent{
 	background-color: #ffffff;
     border: 1px solid grey;
-    opacity: 0.6;
+    opacity: 0.8;
 	color: black;
-    filter: alpha(opacity=60); 
+    filter: alpha(opacity=80); 
 	margin-left:10%;
 	margin-top: 0px;
-	width:300px;
+	width:1210px;
 	height:100%;
 	position:fixed;
 	z-index:1;
@@ -116,12 +116,12 @@ h1{
 .graphsContent{
 	background-color: #ffffff;
     border: 1px solid grey;
-    opacity: 0.6;
+    opacity: 0.8;
 	color: black;
-    filter: alpha(opacity=60); 
+    filter: alpha(opacity=80); 
 	margin-left:10%;
 	margin-top: 0px;
-	width:300px;
+	width:1210px;
 	height:100%;
 	position:fixed;
 	z-index:1;
@@ -143,9 +143,9 @@ h1{
 .dataContent{
 	background-color: #ffffff;
     border: 1px solid grey;
-    opacity: 0.6;
+    opacity: 0.8;
 	color: black;
-    filter: alpha(opacity=60); 
+    filter: alpha(opacity=80); 
 	margin-left:10%;
 	margin-top: 0px;
 	width:300px;
@@ -217,8 +217,7 @@ h1{
 
 .fmenu{
 	font-size:18px;
-	font-style:bold;
-	font-weight:3000;
+	font-weight:bold;
 	background-color: #ffffff;
     border: 1px solid grey;
     opacity: 0.7;
@@ -251,8 +250,10 @@ h1{
 }
 
 .dWords{
-	padding-left:5px;
-	width:48%;
+	padding-left:170px;
+	padding-right:30px;
+	padding-top:10px;
+	width:25%;
 	height:50%;
 	z-index:2;
 	word-wrap: break-word; 
