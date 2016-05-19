@@ -28,15 +28,18 @@
       var dataArray = [];
       var infowindow = new google.maps.InfoWindow({maxWidth: 300});
       var port = 8866;
-      console.log('1.GET_JGEOJSON_DATA: Create variables');//DEBUG
-      var GSS_code = [];
-      var WardName = [];
-      var BoroughName = [];
-      var MedianIncome_2012_13 = [];
-      var IncomeLabel = [];
-      var Area_Km2 = [];
-      var MedianIncome_col = [];
-
+        var bounds;
+        var lat_min;
+        var lng_min;
+        var lat_max;
+        var lng_max;
+        var link2analysis;
+        var wards_poly;
+        var boroughs_poly;
+        var wards_json;
+        var borough_json;
+        var polygonDisplayed = false;
+        var polygonDrawn = false;
       
       
       
@@ -59,218 +62,193 @@
       // Token buttons
       $("#cafe").click( function(event){
           token = 'cafe';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#coffee").click( function(event){
           token = 'coffee';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#pizza").click( function(event){
           token = 'pizza';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#wine").click( function(event){
           token = 'wine';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#grill").click( function(event){
           token = 'grill';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#sushi").click( function(event){
           token = 'sushi';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#thai").click( function(event){
           token = 'thai';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#chicken").click( function(event){
           token = 'chicken';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#fried").click( function(event){
           token = 'fried';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#fish").click( function(event){
           token = 'fish';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#kebab").click( function(event){
           token = 'kebab';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       $("#waitrose").click( function(event){
           token = 'waitrose';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#sainsbury").click( function(event){
           token = 'sainsbury';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#tesco").click( function(event){
           token = 'tesco';
-          viz = 'MedianIncome_col';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'bounds_changed');
-          $("#premisesNum").html("0");
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          setupTokenMap(token, viz);
-          $("#describeWords").load(link2analysis);
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
       
       $("#costcutter").click( function(event){
+          viz = null;
           token = 'costcutter';
-          viz = 'scatter';
-          var link2analysis = './text/'+token+'_analysis.html';
-          event.preventDefault();
-          setAllMap(null);//Clear Markers
-          setupTokenMap(token, viz);
-          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-          $("#describeWords").load(link2analysis);
+            toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
       });
+      
       // Visualisation buttons		
        $("#income").click( function(event){
           //this.setMap(null);
           var viz = 'income';
           //event.preventDefault();
           //Clear Markers
-          setAllMap(null);
-          changeViz(wards_poly, wards_json,'fillColor', setupViz(viz));
-          google.maps.event.clearListeners(map, 'bounds_changed');
+          //setAllMap(null);
+          toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+          setupTokenMap(token);
+          //google.maps.event.clearListeners(map, 'dragend');
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
       });
       
@@ -280,24 +258,24 @@
           //event.preventDefault();
           //Clear Markers
           setAllMap(null);
-          changeViz(wards_poly, wards_json,'fillColor', setupViz(viz));
-          google.maps.event.clearListeners(map, 'bounds_changed');
+          toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+          google.maps.event.clearListeners(map, 'dragend');
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
       });
       $("#lmoran").click( function(event){
           //this.setMap(null);
           var viz = 'lmoran';
-          //event.preventDefault();
+          event.preventDefault();
           //Clear Markers
           setAllMap(null);
-          changeViz(wards_poly, wards_json,'fillColor', setupViz(viz));
-          google.maps.event.clearListeners(map, 'bounds_changed');
+          toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+          google.maps.event.clearListeners(map, 'dragend');
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
       });
       
       function initialize() {
         token = 'cafe'; // first page shows results for cafe
-        viz = 'income'; //first page shows scatter plot of premises
+        viz = null; //first page shows scatter plot of premises
         
         var mapOptions = {
           center: new google.maps.LatLng(51.514756, -0.104345),
@@ -305,21 +283,16 @@
           	styles: darkMap
         };
       console.log('Initialise map');
-      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-              // Load ward shapes
-              
-              $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
+      $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
                       wards_json = JSON.parse(data);
-                      wards_poly = drawPolys(wards_json, 0.5, 1, '#cccccc', 0.7,'yes');
-                      changeViz(wards_poly, wards_json,'fillColor', setupViz(viz));
-                      
-                  });
-              $.get('data/geo/London_Boroughs_WGS84.geojson', function(data) {
+                        console.log('wards_json loaded');
+      });
+      $.get('data/geo/London_Boroughs_WGS84.geojson', function(data) {
                       boroughs_json = JSON.parse(data);
-                      boroughs_poly = drawPolys(boroughs_json, 1, 2, '#f2f2f2', 0,'no');
-                  });
-        toggleMap(false);          
-        setupTokenMap(token);// Setup the page at the opening of the page
+          console.log('borough_json loaded');
+      });
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      google.maps.event.addListener(map, 'dragend', setupTokenMap(token));        
       }  
        
       
@@ -395,7 +368,7 @@
                <td><button><a href="#" id="waitrose">Waitrose</a></button></td>
             </tr>
             <tr>
-               <td><button><a href="#" id="sainsburys">Sainsburys</a></button></td>
+               <td><button><a href="#" id="sainsbury">Sainsbury's</a></button></td>
                <td><button><a href="#" id="tesco">Tesco</a></button></td>
             </tr>
             <tr>
