@@ -3,15 +3,13 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="chrome=edge"> 
 		<title>London Gentrification</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<link rel="stylesheet" type="text/css" href="css/style1.css" />
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 		<script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpXEKSVGbwdXnyk3WRE3c2g_nl2g9rhPM&libraries=visualization"> </script>
         <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
-        <script type='text/javascript' src='js/mapStyle.js'></script>
-        <script type="text/javascript"  src="js/effect.js"></script>
-        <script type="text/javascript"  src="js/mystyle.js"></script>
-        <script type="text/javascript" src="js/modernizr.custom.29473.js"></script>
+        <script type='text/javascript' src='./js/mapStyle.js'></script>
+        <script type="text/javascript"  src="./js/effect.js"></script>
+        <script type="text/javascript" src="./js/modernizr_custom_29473.js"></script>
         <style>
 		html, body {
         height: 100%;
@@ -22,23 +20,28 @@
         
 		</style>
 	</head>
-	
-	<body>
-	<!--use google map API-->	
-
-<!-- START the chunk to be copied and paste -->
-<!-- The Javascript from external websites gets Loaded Here -->
-
-
-<div id="map" class="googlemap"></div>
-
+<body>
+<div id="map-canvas" class="googlemap"></div>
+<!-- The Javascript gets loaded here -->
 <script type="text/javascript">
-	var map;
+    var map;
 	var markerArray = [];
 	var dataArray = [];
 	var infowindow = new google.maps.InfoWindow({maxWidth: 300});
-
-	var port = 8874;
+	var port = 8866;
+	console.log('1.GET_JGEOJSON_DATA: Create variables');//DEBUG
+    var GSS_code = [];
+    var WardName = [];
+    var BoroughName = [];
+    var MedianIncome_2012_13 = [];
+    var IncomeLabel = [];
+    var Area_Km2 = [];
+    var geometry = [];
+    var MedianIncome_col = [];
+	
+	
+	
+	
 
 	$(document).ready(function() {
 		// Register Click events 
@@ -52,209 +55,273 @@
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'dragend');
-			$("#premisesNum").html("0");
+			$("#photoNum").html("0");
 		});
-         
-		 
-		 //tokens
+        //tokens
 		$("#cafe").click( function(event){
 			token = 'cafe';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('cafe');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#coffee").click( function(event){
 			token = 'coffee';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('coffee');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#pizza").click( function(event){
 			token = 'pizza';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('pizza');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#wine").click( function(event){
 			token = 'wine';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('wine');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#grill").click( function(event){
 			token = 'grill';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('grill');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#sushi").click( function(event){
 			token = 'sushi';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('sushi');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#thai").click( function(event){
 			token = 'thai';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('thai');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#chicken").click( function(event){
 			token = 'chicken';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('chicken');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		
 		$("#fried").click( function(event){
 			token = 'fried';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('fried');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		$("#fish").click( function(event){
 			token = 'fish';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('fish');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		$("#kebab").click( function(event){
 			token = 'kebab';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('kebab');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
          $("#waitrose").click( function(event){
 			token = 'waitrose';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('waitrose');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		$("#sainsbury").click( function(event){
 			token = 'sainsbury';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('sainsbury');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
 		$("#tesco").click( function(event){
 			token = 'tesco';
+			viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
 			event.preventDefault();
 			//Clear Markers
 			setAllMap(null);
 			google.maps.event.clearListeners(map, 'bounds_changed');
 			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token);
-			setupTokenMap('tesco');
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
 		});
-		// -------------- Put your click events here ------------------------------------------
-
-
-		// ------------------------------------------------------------------------------------
+		$("#costcutter").click( function(event){
+			var token = 'costcutter';
+			var viz = 'MedianIncome_col';
+			var link2analysis = './text/'+token+'_analysis.html';
+			event.preventDefault();
+			//Clear Markers
+			setAllMap(null);
+			google.maps.event.clearListeners(map, 'bounds_changed');
+			$("#premisesNum").html("0");
+			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+			setupTokenMap(token, viz);
+			$("#describeWords").load(link2analysis);
+		});
+        
 
 		function initialize() {
-		    
+		    token = 'cafe'; // first page shows results for cafe
+		    viz = 'MedianIncome_col'; //first page shows scatter plot of premises
 			var mapOptions = {
 				center: new google.maps.LatLng(51.514756, -0.104345),
 				zoom: 10,
-			 	styles: greyMap
+			 	styles: darkMap
 			};
-			
-			map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            // Load London Wards
+			console.log('Initialise map');
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            // Load ward shapes
             
             $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
-                    var GSS_code = [];
-                    var GSS_code = [];
+                    //console.log('2.GET_JGEOJSON_DATA: load geojson'); DEBUG  
                     geojson = JSON.parse(data);
-                    $.each(geojson.features, function(k,v){
-                        
-                    });
+                    drawPolys(geojson, viz);
                     
                 });
-            map.data.loadGeoJson('data/geo/London_Ward_CityMerged_WGS84.geojson');
-            // Set the stroke width, and fill color for each polygon
-              map.data.setStyle({
-                fillColor: 'black',
-                strokeWeight: 0.1
-              });
-            //test = geojson.responseJSON.features[0]['properties']['GSS_code'];//DEBUG
-		setupTokenMap('cafe');// Setup the page at the opening of the page
-		}
+		    setupTokenMap(token);// Setup the page at the opening of the page
+		}  
+function drawPolys(data, viz) { // Specify geojson and the column associated with the colours of the visualisation
+    for (var i =0; i < data.features.length; i++) {
+    // collect polygon points  
+    var polyPath = [];
+    var colour = 'geojson.features[i].properties.'+viz;
+        for (var p =0; p < data.features[i].geometry.coordinates[0].length; p++) {
+        polyPath.push(new google.maps.LatLng(data.features[i].geometry.coordinates[0][p][1],data.features[i].geometry.coordinates[0][p][0]));
+        }
+        var poly = new google.maps.Polygon({
+            paths: polyPath,
+            strokeColor: "grey",
+            strokeOpacity: 0.7,
+            strokeWeight: 0.2,
+            fillColor: eval(colour),
+            fillOpacity: 0.5,
+            map: map
+            });
+        }
+        
+    }		
+		
 
-// This function gets the boundaries of the map and get the data of the area subsetting by token
-           function setupTokenMap(token){ 
-                console.log(token);
+function setupTokenMap(token){ 
+                console.log('setupTokenMap: ' + token);
+    			if(token !== null){
     			google.maps.event.addListener(map, 'bounds_changed', function() {
-    			    console.log(token);
     				var bounds = map.getBounds();
     				var lat_min = bounds.getSouthWest().lat();
     				var lng_min = bounds.getSouthWest().lng();
     				var lat_max = bounds.getNorthEast().lat();
     				var lng_max = bounds.getNorthEast().lng();
+    				var link2analysis = './text/'+token+'_analysis.html';
     				
     				console.log("SW: " + bounds.getSouthWest() + " NE: " + bounds.getNorthEast());
     				console.log("Center: " + map.getCenter().lat() + ", " +  map.getCenter().lng());
     				getData(lat_min, lng_min, lat_max, lng_max,token);
-			});
+                    $("#describeWords").load(link2analysis);
+			})}
+			else {console.log('No scatterplot')}
 		}
 
 
@@ -281,7 +348,7 @@
 					
 					var marker = new google.maps.Marker({
       					position: latLng, 
-      					icon: "./img/icon.png",
+      					icon: "./img/icon_" + token + '.png',
       					customInfo: v.BusinessID				
       				});
 
@@ -312,7 +379,8 @@
 		google.maps.event.addDomListener(window, 'load', initialize);
 
 	});
-
+	
+	
 	//  ******************* FUNCTIONS TO USE FOR THE MAP YOU DON"T NEED TO EDIT ANYTHING BELOW THIS LINE **************************************************
 	
 	function createMarkers(){
@@ -333,42 +401,46 @@
 
 	String.prototype.replaceAll = function(str1, str2, ignore) {
     	return decodeURIComponent( this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2) );
-	}; 
-
-
+	};
+	
+	
+	
+	
+	
 </script>
-<!-- END the chunk to be copied and pasted -->
 
-
+<div id='wrapper'>
 		<!--sidebar-->
 	    <div id="sidebar" class="bar" style="text-align:left;">
-		<h1>London Gentrification</h1>
-		<input name="button1" type="button" value="The Project"; class="button description" onclick=button1();>
-        <input name="button2" type="button" value="Methodology"; class="button methodology" onclick=button2();>
-		<input name="button3" type="button" value="Team"; class="button graphs" onclick=button3();>
-        <input name="button4" type="button" value="Data Sources"; class="button data" onclick=button4();>
+		<div class="title">
+		<a href="index.html" style=" color:white;">London Gentrification</a>
+		</div>
+		<input name="button1" type="button" value="The Project" class="button description" onclick=button1();>
+        <input name="button2" type="button" value="Methodology" class="button methodology" onclick=button2();>
+		<input name="button3" type="button" value="Team" class="button graphs" onclick=button3();>
+        <input name="button4" type="button" value="Data Sources" class="button data" onclick=button4();>
 
 		</div>
 		
 		<!--button description slideToggle-->
-		<div id="content1"class="desContent">
+		<div id="content1" class="desContent">
 	    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
         </div>
-		<div id="content2"class="methodContent">
+		<div id="content2" class="methodContent">
 	    <p>ssssssssssssssssssssssssssssssssss</p>
         </div>
-		<div id="content3"class="graphsContent">
+		<div id="content3" class="graphsContent">
 	    <p>fffffffffffffffffffffffff</p>
         </div>
-		<div id="content4"class="dataContent">
+		<div id="content4" class="dataContent">
 	    <p>hhhhhhhhhhhhhhhhhhhhhhhhh</p>
         </div>
 		
 		<!--filterbar-->
-		<div id="filterbar" class="rightbar" >
+		   <div id="filterbar" class="rightbar" >
            <button  class="filters"  onclick=filterclick();>F</br>I</br>L</br>T</br>E</br>R</button>
 		   <button id="plotbtn" class="plots"  onclick=plotclick();>P</br>L</br>O</br>T</br>S</button>
-		</div>
+		   </div>
 		
 		<div id="filtermenu" class="fmenu">
            <p>Tokens</p>
@@ -421,11 +493,11 @@
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="localquotation">Location Quotation</a></button></td>
+		   <td><button><a href="#" id="lq">Location Quotation</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="localmorans">Local Moran's I</a></button></td>
+		   <td><button><a href="#" id="lmoran">Local Moran's I</a></button></td>
 		   </tr>
 		   
 		   <tr>
@@ -445,22 +517,26 @@
 		
 		
 		<!--plotbar-->
-		<div id="plottab" class="ptab">
+		   <div id="plottab" class="ptab">
+		   
 	       <div id="describeWords" class="dWords">
-		   <p>ffffffffffffffffffffffffffvvdssseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvvvvvttttttttttttttttttttttttttttttttttttttttttttttttttttttttvvv</p>
+            <!--<iframe src = "./text/cafe_analysis.html" name="targetframe" allowTransparency="true" scrolling="yes" frameborder="0" > 
+    </iframe>-->
+    
 		   </div>
 		   
 		   <div id="plotgraph" class="pgraph" >
 		   
-		  <img class="plot1"  src="img/downloadedImage.jpg"  style="width:100%;height:100%;padding-top:5px;padding-right:5px;">
-		  <img class="plot1"  src="img/TOTALtu.jpg"  style="width:100%;height:100%;padding-top:5px;padding-right:5px;">
+		   
+		  <img class="plot1"  src="./img/downloadedImage.jpg"  style="width:96%;height:100%;padding-top:5px;padding-right:8px;">
+		  <img class="plot1"  src="./img/TOTALtu.jpg"  style="width:96%;height:100%;padding-top:5px;padding-right:8px;">
 
-          <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
-          <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">❯</a> 
+          <a class="w3-btn-floating" style="position:absolute;top:45%;left:0;" onclick="plusDivs(-1)">❮</a>
+          <a class="w3-btn-floating" style="position:absolute;top:45%;right:22px;" onclick="plusDivs(1)">❯</a> 
 		  </div>
 		  </div>
-		
-		<script>
+		  <script>
+		   //  ************* 
           var slideIndex = 1;
           showDivs(slideIndex);
 
@@ -471,13 +547,16 @@
           function showDivs(n) {
           var i;
           var x = document.getElementsByClassName("plot1");
-          if (n > x.length) {slideIndex = 1}    
-          if (n < 1) {slideIndex = x.length} ;
+          if (n > x.length) {slideIndex = 1;}    
+          if (n < 1) {slideIndex = x.length;}
           for (i = 0; i < x.length; i++) {
           x[i].style.display = "none";  
           }
           x[slideIndex-1].style.display = "block";  
           }
-          </script>	
-	</body>
-	</html>
+//  *************
+		   </script>
+		  
+</div>		
+</body>
+</html>

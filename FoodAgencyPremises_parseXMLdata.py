@@ -1,7 +1,7 @@
 # Create a dataframe from the downloaded data (see GetData.py)
 from py_functions import parseXML as px
-data_folder = './Data/'
-colnames = 'Data/col_names.csv'
+data_folder = './Data/FoodPremises/'
+colnames = 'Data/FoodPremises/col_names.csv'
 
 # For debugging:
 #import imp

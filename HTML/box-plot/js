@@ -1,12 +1,13 @@
 $(function () {
-    $('#container').highcharts({
+    $('#box_plot').highcharts({
 
         chart: {
             type: 'boxplot'
+
         },
 
         title: {
-            text: ' Token Box Plot'
+            text: 'Box Plot for Tokens with Income Estimate'
         },
 
         legend: {
@@ -14,7 +15,7 @@ $(function () {
         },
 
         xAxis: {
-            categories: ['cafe','coffee','Pizza','grill','wine','sushi','thai','chicken','fried','fish','kebab','waitrose','sainsbury','tesco','costcutter'],
+            categories: ['cafe','coffee','pizza','grill','wine','sushi','thai','chicken','fried','fish','kebab','waitrose','sainsbury','tesco','costcutter'],
             title: {
                 text: 'Tokens'
             }
@@ -25,6 +26,21 @@ $(function () {
                 text: 'Income Estimate'
             },
 
+        },
+
+       plotOptions: {
+            boxplot: {
+                fillColor: '#F0F0E0',
+                lineWidth: 2,
+                medianColor: '#0C5DA5',
+                medianWidth: 3,
+                stemColor: '#A63400',
+                stemDashStyle: 'dot',
+                stemWidth: 1,
+                whiskerColor: '#3D9200',
+                whiskerLength: '50%',
+                whiskerWidth: 3
+            }
         },
 
         series: [{

@@ -1,14 +1,13 @@
 # Convert the downloaded data from www.food.gov.uk/ to a dataframe
-# The function is used in iteration in parse_data.py
 def parse_xml(xml_file, col_names):
     """
-    :param xml_file: an xml file as downloaded from www.food.gov.uk
-    :param colnames: csv with the column names of the complete XML
+    :param xml_file: path to an xml file as downloaded from www.food.gov.uk
+    :param colnames: path to a csv with the column names of the complete XML
     :return: conversion of the xml to a dataframe, each line is a premise
     """
     import pandas as pd
     import xml.etree.ElementTree as ET
-    import extract_from_child as ex
+    from py_functions import extract_from_child as ex
     # read the xml
     tree = ET.parse('%s' % xml_file)
     root = tree.getroot()  # get the root
@@ -16,10 +15,12 @@ def parse_xml(xml_file, col_names):
     column_names = pd.read_csv('%s' % col_names).columns  # read the columns of the dataframe
     df_temp = pd.DataFrame(columns=[column_names])  # create an empty dataframe to be filled up
 
-    #   Extract the information for each premise and store it in df_temp
+    #   Extracts the information for each premise and store it in df_temp
     for premise in range(0, len(root), 1):
-        tags = ex.extract_tag(root[premise])
-        content = ex.extract_content(root[premise])
+        tags = ex.extract_tag(root[premise]) # Explores each branch of the xml tree, stores the tags in a list
+        content = ex.extract_content(root[premise]) # Explores each branch of the xml tree, stores the content in a list
+        # Creates rows of the df by matching the column names in 'df_temp' with the tag names in 'tags' and stores
+        # 'content' if there is a match or null if not
         df_temp = df_temp.append(ex.make_df(tags, content, column_names), ignore_index=True)
 
     #   get the relevant variables and convert to appropriate format
@@ -43,19 +44,19 @@ def parse_xml(xml_file, col_names):
 
     return df_final
 
-
-def parse_xml_folder(data_folder, colnames):
+# Applies parse_xml to a folder of xml files
+def parse_xml_folder(data_folder_path, colnames_path):
     """
-    :param data_folder: address of a folder where XML files are stored
-    :param colnames: csv with the column names of the complete XML
+    :param data_folder: path to a folder where XML files are stored
+    :param colnames: path to a csv with the column names of the complete XML
     :return: return a dataframe, each line is a premise
     """
     import pandas as pd
     import glob
-    xml_list = glob.glob('%s*.xml' % data_folder)
+    xml_list = glob.glob('%s*.xml' % data_folder_path)
     df_final = pd.DataFrame()
     for xml in xml_list:
-        df_xml = parse_xml(xml, colnames)
+        df_xml = parse_xml(xml, colnames_path)
         df_final = df_final.append(df_xml, ignore_index=True)
 
     return df_final

@@ -4,7 +4,7 @@
 
 def merge_2string(text):  # obsolete
     """
-    :param text: a series of names in the for of strings
+    :param text: a series of names in the foorm of strings
     :return: a single string with all the names, excluding single words
     """
     text_str = str()  # create a single string with all the names, removing single letters
@@ -58,15 +58,15 @@ def token_spatial(dataf):
 
     df = pd.DataFrame(columns = column_list)
 
-    for i in dataf.index:
-        bn = dataf.ix[i]['BusinessName']
+    for i in dataf.index: # for each food premise
+        bn = dataf.ix[i]['BusinessName'] # Get the business name of a single premise
 
-        tokens = bn.split()
-        tokens = [x.lower() for x in tokens]
+        tokens = bn.split() # split the name into single words or tokens
+        tokens = [x.lower() for x in tokens] # convert all the letters to lower case
 
         tmp = pd.DataFrame(columns = column_list)
-        for j in range(len(tokens)):
-            if len(tokens[j]) > 1:
+        for j in range(len(tokens)): # for each token into the name of the food premise
+            if len(tokens[j]) > 1: # skip tokens with one letter only
                 tmp = tmp.append(pd.DataFrame({'Token': tokens[j],
                                                'PostCode': dataf.ix[i]['PostCode'],
                                                'RatingValue': dataf.ix[i]['RatingValue'],
@@ -83,6 +83,6 @@ def token_spatial(dataf):
                                                'BusinessID':int(i)},
                                               index= [1]), ignore_index=True)
         df = df.append(tmp, ignore_index= True)
-    df = df[df['lat'].notnull()]
+    df = df[df['lat'].notnull()] # remove lines with no geographical information
     return df
 

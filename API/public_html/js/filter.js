@@ -1,6 +1,7 @@
 var wordsResults=[];
 
-function showResults(){
+function showResults()
+{
 	$(document).click(function(){
 		{
 			

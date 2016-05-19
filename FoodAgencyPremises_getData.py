@@ -4,7 +4,7 @@ import urllib
 
 
 
-fields = pd.read_csv('./Data/col_names.csv', sep=',', encoding='latin1').columns
+fields = pd.read_csv('./Data/FoodPremises/col_names.csv', sep=',', encoding='latin1').columns
 
 fields_dict = {}
 final_df = pd.DataFrame(columns=fields)
@@ -15,6 +15,6 @@ for i in range(501, 534, 1):
     filename='%s.xml'% str(i)
     df=pd.DataFrame({'address':[address], 'code':[i],'filename': [filename]})
     links=links.append(df)
-    urllib.request.urlretrieve(address, 'Data/%s' % filename)
+    urllib.request.urlretrieve(address, 'Data/FoodPremises/%s' % filename)
 
 

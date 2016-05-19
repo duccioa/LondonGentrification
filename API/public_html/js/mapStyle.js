@@ -12,8 +12,6 @@ var blackMap = [
         ]
     }
 ]
-
-
 var greyMap = [
     {
         "featureType": "poi",
@@ -62,10 +60,10 @@ var greyMap = [
                 "saturation": 0
             },
             {
-                "lightness": -100
+                "lightness": 30
             },
             {
-                "visibility": "off"
+                "visibility": "on"
             }
         ]
     },
@@ -258,4 +256,4 @@ var darkMap = [
       { "visibility": "off" }
     ]
   }
-]			
+]		
