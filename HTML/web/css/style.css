@@ -14,12 +14,12 @@ height:100%;
 
 
 .googlemap {
-	float: left;
-	margin-left: 150px;
-	width: 86.5%;
-	margin-right:30px;
+	float:left;
+	left: 150px;
+	min-width: 50%;
+	right:30px;
 	height: 100%;
-	position: fixed;
+	position: absolute;
 	border:none;
 }
 
@@ -248,9 +248,9 @@ height:100%;
 	color: black;
 	float: right;
 	filter: alpha(opacity=70);
-	margin-left: 175px;
-	right:26px;
-	width: 87%;
+	left: 150px;
+	right:30px;
+	min-width: 20%;
 	height: 50%;
 	bottom:0;
 	position: absolute;
@@ -258,27 +258,25 @@ height:100%;
 	display: none;
 }
 
+
 .dWords {
-	padding-left: 170px;
-	padding-right: 30px;
-	padding-top: 10px;
-	width: 25%;
-	height: 50%;
+	left:15%;
+	height: 80%;
 	z-index: 2;
 	word-wrap: break-word;
 	word-break: normal;
+	position: absolute;
 	float: left;
-	position: relative;
-	border: 2px black;
 }
 
 .pgraph {
-	margin-left: 47%;
-	margin-right: 8%;
-	width: 40%;
-	height: 48%;
+	top:5%;
+	margin-left:50%;
+	width: 50%;
+	height: 90%;
 	z-index: 2;
-	position: fixed;
+	position: absolute;
+	float:right;
 }
 
 .plot1 {

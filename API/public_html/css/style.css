@@ -6,12 +6,21 @@ body {
 	font-weight: 300;
 }
 
+.wrapper{
+margin:0;
+width:100%;	
+height:100%;
+}
+
+
 .googlemap {
-	float: right;
-	margin-left: 150px;
-	width: 90%;
+	float:left;
+	left: 150px;
+	min-width: 50%;
+	right:30px;
 	height: 100%;
-	position: fixed;
+	position: absolute;
+	border:none;
 }
 
 .bar {
@@ -23,14 +32,20 @@ body {
 	position: fixed;
 }
 
-h1 {
+.title{
+	padding-left:5px;
+	padding-top:40px;
+	text-align:left;
+}
+
+.title a:link {
+	color:white;
+	text-decoration:none;
+	font-weight:bold;
 	font-size: 1.1em;
 	text-transform: uppercase;
-	text-align: left;
-	margin: 6px;
-	padding-left: 0px;
-	padding-top: 40px;
 }
+
 
 .button {
 	background-color: #3A3434;
@@ -159,8 +174,7 @@ h1 {
 	color: white;
 	filter: alpha(opacity=70);
 	border-bottom: 2px solid grey;
-	margin-left:98%;
-	margin-right:0%;
+	right:0;
 	width:30px;
 	height:100%;
 	float:right;
@@ -218,14 +232,14 @@ h1 {
 	color: black;
 	float: right;
 	filter: alpha(opacity=70);
-	margin-left: 85%;
-	margin-right:3%;
+	right:27px;
 	width: 200px;
-	height: 100%;
-	position: fixed;
+	height: 99%;
+	position: absolute;
 	z-index: 2;
 	display: none;
 }
+
 
 .ptab {
 	background-color: #FFFFFF;
@@ -234,36 +248,38 @@ h1 {
 	color: black;
 	float: right;
 	filter: alpha(opacity=70);
-	margin-left: 150px;
-	width: 89%;
+	left: 150px;
+	right:30px;
+	min-width: 20%;
 	height: 50%;
-	margin-top: 29%;
-	position: fixed;
+	bottom:0;
+	position: absolute;
 	z-index: 2;
 	display: none;
 }
 
+
 .dWords {
-	padding-left: 170px;
-	padding-right: 30px;
-	padding-top: 10px;
-	width: 25%;
-	height: 50%;
+	padding-left:5%;
+	margin-top:3%;
+	height: 83%;
+	width: 40%;
 	z-index: 2;
 	word-wrap: break-word;
 	word-break: normal;
+	position: absolute;
 	float: left;
-	position: relative;
-	border: 2px black;
+	overflow:scroll;
 }
 
 .pgraph {
-	margin-left: 47%;
-	margin-right: 8%;
-	width: 40%;
-	height: 48%;
+	top:5%;
+	margin-left:50%;
+	width: 50%;
+	height: 90%;
 	z-index: 2;
-	position: fixed;
+	position: absolute;
+	float:right;
 }
 
 .plot1 {
@@ -324,6 +340,7 @@ h1 {
 	border: none;
 	font-size: 1em;
 	text-align: center;
+    padding-left:10px;
 }
 
 .tokens a:link, a:visited {
@@ -355,6 +372,7 @@ h1 {
 	border: none;
 	font-size: 1em;
 	text-align: center;
+	padding-left:10px;
 }
 
 .visualization a:link, a:visited {

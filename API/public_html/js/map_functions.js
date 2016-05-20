@@ -1,14 +1,14 @@
-function drawPolys(data, sw, z, stCol, fillOp,click) { 
-// readapted from http://stackoverflow.com/questions/26122806/how-can-i-color-geojson-features-differently-based-on-their-id-googlemaps
-// data: geojson, i.e. wards_json
-// sw: stroke weight
-// z: z-index
-// stCol: stroke color
-// fillOp: fill opacity
+function drawPolys(data, sw, z, stCol, fillOp, click) {
+    // adapted from http://stackoverflow.com/questions/26122806/how-can-i-color-geojson-features-differently-based-on-their-id-googlemaps
+    // data: geojson, i.e. wards_json
+    // sw: stroke weight
+    // z: z-index
+    // stCol: stroke color
+    // fillOp: fill opacity
 
     var polyArray = [];
     console.log('Drawing polygons for' + data);
-    for (var i = 0; i < data.features.length; i++) { 
+    for (var i = 0; i < data.features.length; i++) {
         // collect polygon points  
         var polyPath = [];
         for (var p = 0; p < data.features[i].geometry.coordinates[0].length; p++) {
@@ -22,7 +22,7 @@ function drawPolys(data, sw, z, stCol, fillOp,click) {
             fillColor: null, //eval(colour),
             zIndex: z,
             fillOpacity: fillOp,
-            clickable:click,
+            clickable: click,
             map: map
         }));
         //if(addEvent){add the event}
@@ -34,56 +34,53 @@ function drawPolys(data, sw, z, stCol, fillOp,click) {
 
 
 
-function changeViz(vizAttribute, newValuesField){//poly, geojson,
-        // poly is the geometry i.e. wards_poly
-        // geojson is the geojson with the data
-        // vizAttribute is the map style attribute to be changed i.e. 'strokeColor', 'fillColor'
-        // newValuesField is the name of the geojson's column to fetch the values from i.e. 'income_color' or setupViz('lq') 
-        function resetViz(i,newValue) {
-            wards_poly[i][vizAttribute] = newValue;
-            wards_poly[i].setMap();
-            wards_poly[i].setMap(map);
-        }
-        
-        function getProperty(wards_json, newValuesField, callback) {
-            if(newValuesField === null){
-                toggleMap(false);
-            }
-            else{
-            for (var i = 0; i < wards_json.features.length; i++) {
-                callback(i,wards_json.features[i].properties[newValuesField]);
-            }
-            }
-        
-        }
-        
-        
-        getProperty(wards_json, newValuesField, resetViz);
-        
+function changeViz(vizAttribute, newValuesField) {
+    // vizAttribute is the map style attribute to be changed i.e. 'strokeColor', 'fillColor'
+    // newValuesField is the name of the geojson's column to fetch the values from i.e. 'income_color' or setupViz('lq') 
+    function resetViz(i, newValue) {
+        wards_poly[i][vizAttribute] = newValue;
+        wards_poly[i].setMap();
+        wards_poly[i].setMap(map);
     }
+
+    function getProperty(wards_json, newValuesField, callback) {
+        if (newValuesField === null) {
+            toggleMap(false);
+        } else {
+            for (var i = 0; i < wards_json.features.length; i++) {
+                callback(i, wards_json.features[i].properties[newValuesField]);
+            }
+        }
+
+    }
+
+
+    getProperty(wards_json, newValuesField, resetViz);
+
+}
 
 
 
 // Set up the scatter plot map filtered by token
 function setupTokenMap(token) {
-        
-        function loop() {
-    var args = arguments;
-    if (args.length <= 0)
-        return;
-    (function chain(i) {
-        if (i >= args.length || typeof args[i] !== 'function')
-            return;
-        window.setTimeout(function() {
-            args[i]();
-            chain(i + 1);
-        }, 1000);
-    })(0);
-} 
-    
 
-        loop(
-            function(){
+    function loop() {
+        var args = arguments;
+        if (args.length <= 0)
+            return;
+        (function chain(i) {
+            if (i >= args.length || typeof args[i] !== 'function')
+                return;
+            window.setTimeout(function() {
+                args[i]();
+                chain(i + 1);
+            }, 1000);
+        })(0);
+    }
+
+
+    loop(
+        function() {
             console.log('setupTokenMap: loop1');
             bounds = map.getBounds();
             lat_min = bounds.getSouthWest().lat();
@@ -92,16 +89,18 @@ function setupTokenMap(token) {
             lng_max = bounds.getNorthEast().lng();
             link2analysis = './text/' + token + '_analysis.html';
             console.log("SW: " + bounds.getSouthWest() + " NE: " + bounds.getNorthEast());
-            console.log("Center: " + map.getCenter().lat() + ", " + map.getCenter().lng()); },
-            function(){
-                console.log('setupTokenMap: loop2');
-                getData(lat_min, lng_min, lat_max, lng_max, token);
-                $("#describeWords").load(link2analysis); }
-            );
-            
-            
-        
-    
+            console.log("Center: " + map.getCenter().lat() + ", " + map.getCenter().lng());
+        },
+        function() {
+            console.log('setupTokenMap: loop2');
+            getData(lat_min, lng_min, lat_max, lng_max, token);
+            $("#describeWords").load(link2analysis);
+        }
+    );
+
+
+
+
 }
 
 
@@ -118,60 +117,59 @@ function setupViz(viz) {
         field = token + '_smooth_' + viz + '_color';
         console.log('setupViz: Visualisation set to: ' + field);
         return field;
-    } 
-    if (viz == 'lmoran'){
+    }
+    if (viz == 'lmoran') {
         field = token + '_morans_color';
         return field;
-    }
-    else {
+    } else {
         field = null;
         console.log('setupViz: No polygons drawn');
         return field;
     }
 }
 
-function toggleMap(state, callback){
-    if(state){
-        if(polygonDrawn){
-        if(polygonDisplayed){
-            console.log('toggleMap: Polygon already ON');
-        } else{
-            for (var i = 0; i < wards_poly.length; i++){
-        wards_poly[i].setMap(null);
-        wards_poly[i].setMap(map);
-        }
-        for (var j = 0; j < boroughs_poly.length; j++){
-            boroughs_poly[j].setMap(null);
-            boroughs_poly[j].setMap(map);
-        }
-        polygonDisplayed = true;
-        }
-        }else{
+function toggleMap(state, callback) {
+    if (state) {
+        if (polygonDrawn) {
+            if (polygonDisplayed) {
+                console.log('toggleMap: Polygon already ON');
+            } else {
+                for (var i = 0; i < wards_poly.length; i++) {
+                    wards_poly[i].setMap(null);
+                    wards_poly[i].setMap(map);
+                }
+                for (var j = 0; j < boroughs_poly.length; j++) {
+                    boroughs_poly[j].setMap(null);
+                    boroughs_poly[j].setMap(map);
+                }
+                polygonDisplayed = true;
+            }
+        } else {
             polygonDisplayed = true;
             polygonDrawn = true;
-            
-                      wards_poly = drawPolys(wards_json, 0.5, 1, '#cccccc', 0.7,'yes');
-                      boroughs_poly = drawPolys(boroughs_json, 1, 2, '#f2f2f2', 0,'no');
+
+            wards_poly = drawPolys(wards_json, 0.5, 1, '#cccccc', 0.7, 'yes');
+            boroughs_poly = drawPolys(boroughs_json, 1, 2, '#f2f2f2', 0, 'no');
         }
     }
-    if(!state){
-        if(polygonDisplayed){
-            for (var i = 0; i < wards_poly.length; i++){
-        wards_poly[i].setMap(null);
+    if (!state) {
+        if (polygonDisplayed) {
+            for (var i = 0; i < wards_poly.length; i++) {
+                wards_poly[i].setMap(null);
             }
-        for (var j = 0; j < boroughs_poly.length; j++){
-        boroughs_poly[j].setMap(null);
+            for (var j = 0; j < boroughs_poly.length; j++) {
+                boroughs_poly[j].setMap(null);
             }
             polygonDisplayed = false;
-        }else{
+        } else {
             console.log('toggleMap: Polygon already OFF');
         }
     }
-    if(callback != null){
-      callback();
+    if (callback != null) {
+        callback();
     }
 }
-    
+
 
 
 function getData(lat_min, lng_min, lat_max, lng_max, token) {
@@ -225,19 +223,18 @@ function getData(lat_min, lng_min, lat_max, lng_max, token) {
 
 
 
-      function createMarkers(){
-      var marker = new google.maps.Marker({
-      	position: latLng 				
-      });
-      }
-      
-      function setAllMap(map) {
-      for (var i = 0; i < markerArray.length; i++) {
-      markerArray[i].setMap(map);
-      }
-      }
-      
-      function clearMarkers() {
-      setAllMarkers(null);
-      }
-      
+function createMarkers() {
+    var marker = new google.maps.Marker({
+        position: latLng
+    });
+}
+
+function setAllMap(map) {
+    for (var i = 0; i < markerArray.length; i++) {
+        markerArray[i].setMap(map);
+    }
+}
+
+function clearMarkers() {
+    setAllMarkers(null);
+}
