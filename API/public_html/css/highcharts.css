@@ -1,0 +1,21 @@
+
+#token_frequency {
+    height: 400px;
+    min-width: 350px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#box_plot {
+    width:100%; 
+    height:400px;
+    min-width: 350px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#treemap {
+    min-width: 350px;
+    max-width: 900px;
+    margin: 0 auto;
+}

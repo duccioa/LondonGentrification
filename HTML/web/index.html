@@ -1,413 +1,387 @@
 <!DOCTYPE html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="chrome=edge"> 
-		<title>London Gentrification</title>
-		<link rel="stylesheet" type="text/css" href="./css/style.css" />
-		<script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpXEKSVGbwdXnyk3WRE3c2g_nl2g9rhPM&libraries=visualization"> </script>
-        <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
-        <script type='text/javascript' src='./js/mapStyle.js'></script>
-        <script type="text/javascript"  src="./js/effect.js"></script>
-        <script type="text/javascript" src="./js/modernizr_custom_29473.js"></script>
-        <style>
-		html, body {
-        height: 100%;
-        margin:0;
-        padding: 0;
-        }
-		
-        
-		</style>
-	</head>
+<head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="chrome=edge">
+   <title>London Gentrification</title>
+   <link rel="stylesheet" type="text/css" href="./css/style.css" />
+   <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7UJ1JbKnBvycoS-SATXKgf7HwUdxWPZA&libraries=visualization"> </script>
+   <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
+   <script type='text/javascript' src='./js/mapStyle.js'></script>
+   <script type="text/javascript"  src="./js/effect.js"></script>
+   <script type="text/javascript" src="./js/modernizr_custom_29473.js"></script>
+   <script type="text/javascript" src="./js/map_functions.js"></script>
+   <style>
+      html, body {
+      height: 100%;
+      margin:0;
+      padding: 0;
+      }
+   </style>
+</head>
 <body>
-<div id="map-canvas" class="googlemap"></div>
-<!-- The Javascript gets loaded here -->
-<script type="text/javascript">
-    var map;
-	var markerArray = [];
-	var dataArray = [];
-	var infowindow = new google.maps.InfoWindow({maxWidth: 300});
-	var port = 8866;
-	console.log('1.GET_JGEOJSON_DATA: Create variables');//DEBUG
-    var GSS_code = [];
-    var WardName = [];
-    var BoroughName = [];
-    var MedianIncome_2012_13 = [];
-    var IncomeLabel = [];
-    var Area_Km2 = [];
-    var geometry = [];
-    var MedianIncome_col = [];
-	
-	
-	
-	
+   <div id="map-canvas" class="googlemap"></div>
+   <!-- The Javascript gets loaded here -->
+   <script type="text/javascript">
+      var map;
+      var markerArray = [];
+      var dataArray = [];
+      var infowindow = new google.maps.InfoWindow({maxWidth: 300});
+      var port = 8866;
+        var bounds;
+        var lat_min;
+        var lng_min;
+        var lat_max;
+        var lng_max;
+        var link2analysis;
+        var wards_poly;
+        var boroughs_poly;
+        var wards_json;
+        var borough_json;
+        var polygonDisplayed = false;
+        var polygonDrawn = false;
 
-	$(document).ready(function() {
-		// Register Click events 
-		$("#resetLink").click( function(event){
-			event.preventDefault();
-			location.reload();
-		});
-
-		$("#clearLink").click( function(event){
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'dragend');
-			$("#photoNum").html("0");
-		});
-        //tokens
-		$("#cafe").click( function(event){
-			token = 'cafe';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#coffee").click( function(event){
-			token = 'coffee';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#pizza").click( function(event){
-			token = 'pizza';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#wine").click( function(event){
-			token = 'wine';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#grill").click( function(event){
-			token = 'grill';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#sushi").click( function(event){
-			token = 'sushi';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#thai").click( function(event){
-			token = 'thai';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#chicken").click( function(event){
-			token = 'chicken';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		
-		$("#fried").click( function(event){
-			token = 'fried';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		$("#fish").click( function(event){
-			token = 'fish';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		$("#kebab").click( function(event){
-			token = 'kebab';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-         $("#waitrose").click( function(event){
-			token = 'waitrose';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		$("#sainsbury").click( function(event){
-			token = 'sainsbury';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		$("#tesco").click( function(event){
-			token = 'tesco';
-			viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
-		$("#costcutter").click( function(event){
-			var token = 'costcutter';
-			var viz = 'MedianIncome_col';
-			var link2analysis = './text/'+token+'_analysis.html';
-			event.preventDefault();
-			//Clear Markers
-			setAllMap(null);
-			google.maps.event.clearListeners(map, 'bounds_changed');
-			$("#premisesNum").html("0");
-			console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-			setupTokenMap(token, viz);
-			$("#describeWords").load(link2analysis);
-		});
+      
+      
+      
+      $(document).ready(function() {
+      // Register Click events 
+      $("#resetLink").click( function(event){
+          event.preventDefault();
+          location.reload();
+      });
+      
+      $("#clearLink").click( function(event){
+          event.preventDefault();
+          //Clear Markers
+          setAllMap(null);
+          google.maps.event.clearListeners(map, 'dragend');
+          $("#photoNum").html("0");
+      });
+      
+      // Token buttons
+      $("#cafe").click( function(event){
+          token = 'cafe';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+			var color_btn = document.getElementById('cafe_btn');
+			cafe_btn.style.backgroundColor="white";
+      });
+      
+      $("#coffee").click( function(event){
+          token = 'coffee';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#pizza").click( function(event){
+          token = 'pizza';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#wine").click( function(event){
+          token = 'wine';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#grill").click( function(event){
+          token = 'grill';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#sushi").click( function(event){
+          token = 'sushi';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#thai").click( function(event){
+          token = 'thai';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#chicken").click( function(event){
+          token = 'chicken';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#fried").click( function(event){
+          token = 'fried';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#fish").click( function(event){
+          token = 'fish';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#kebab").click( function(event){
+          token = 'kebab';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      $("#waitrose").click( function(event){
+          token = 'waitrose';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#sainsbury").click( function(event){
+          token = 'sainsbury';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#tesco").click( function(event){
+          token = 'tesco';
+          viz = null;
+          toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './img/'+token+'_histogram.png';
+            var link2corr = './img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      $("#costcutter").click( function(event){
+          viz = null;
+          token = 'costcutter';
+            toggleMap(false);
+            var link2analysis = './text/'+token+'_analysis.html';
+            var link2hist = './public_html/img/'+token+'_histogram.png';
+            var link2corr = './public_html/img/'+token+'_scatter.png';
+            event.preventDefault();
+            setAllMap(null);//Clear Markers
+            setupTokenMap(token);
+            console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+            $("#describeWords").load(link2analysis);
+            document.getElementById("token-title").innerHTML = token;
+            document.getElementById('hist').src=link2hist;
+            document.getElementById('corr').src=link2corr;
+      });
+      
+      // Visualisation buttons		
+       $("#income").click( function(event){
+          var viz = 'income';
+          var link2description = './text/'+viz+'_description.html';
+          toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+          setupTokenMap(token);
+          $("#describeViz").load(link2description);
+          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+      });
+      
+      $("#lq").click( function(event){
+          var viz = 'lq';
+          var link2description = './text/'+viz+'_description.html';
+          setAllMap(null);
+          toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+          google.maps.event.clearListeners(map, 'dragend');
+          $("#describeViz").load(link2description);
+          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+      });
+      $("#lmoran").click( function(event){
+          var viz = 'lmoran';
+          var link2description = './text/'+viz+'_description.html';
+          event.preventDefault();
+          setAllMap(null);
+          toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+          google.maps.event.clearListeners(map, 'dragend');
+          $("#describeViz").load(link2description);
+          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+      });
+      
+      function initialize() {
+        token = 'cafe'; // first page shows results for cafe
+        viz = null; //first page shows scatter plot of premises
         
+        var mapOptions = {
+          center: new google.maps.LatLng(51.514756, -0.104345),
+          zoom: 10,
+          	styles: darkMap
+        };
+      console.log('Initialise map');
+      $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
+                      wards_json = JSON.parse(data);
+                        console.log('wards_json loaded');
+      });
+      $.get('data/geo/London_Boroughs_WGS84.geojson', function(data) {
+                      boroughs_json = JSON.parse(data);
+          console.log('borough_json loaded');
+      });
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      google.maps.event.addListener(map, 'dragend', setupTokenMap(token));        
+      }  
+      google.maps.event.addDomListener(window, 'load', initialize);
+      
+      });
+      
+      
 
-		function initialize() {
-		    token = 'cafe'; // first page shows results for cafe
-		    viz = 'MedianIncome_col'; //first page shows scatter plot of premises
-			var mapOptions = {
-				center: new google.maps.LatLng(51.514756, -0.104345),
-				zoom: 10,
-			 	styles: darkMap
-			};
-			console.log('Initialise map');
-			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            // Load ward shapes
-            
-            $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
-                    //console.log('2.GET_JGEOJSON_DATA: load geojson'); DEBUG  
-                    geojson = JSON.parse(data);
-                    drawPolys(geojson, viz);
-                    
-                });
-		    setupTokenMap(token);// Setup the page at the opening of the page
-		}  
-function drawPolys(data, viz) { // Specify geojson and the column associated with the colours of the visualisation
-    for (var i =0; i < data.features.length; i++) {
-    // collect polygon points  
-    var polyPath = [];
-    var colour = 'geojson.features[i].properties.'+viz;
-        for (var p =0; p < data.features[i].geometry.coordinates[0].length; p++) {
-        polyPath.push(new google.maps.LatLng(data.features[i].geometry.coordinates[0][p][1],data.features[i].geometry.coordinates[0][p][0]));
-        }
-        var poly = new google.maps.Polygon({
-            paths: polyPath,
-            strokeColor: "grey",
-            strokeOpacity: 0.7,
-            strokeWeight: 0.2,
-            fillColor: eval(colour),
-            fillOpacity: 0.5,
-            map: map
-            });
-        }
-        
-    }		
-		
-
-function setupTokenMap(token){ 
-                console.log('setupTokenMap: ' + token);
-    			if(token !== null){
-    			google.maps.event.addListener(map, 'bounds_changed', function() {
-    				var bounds = map.getBounds();
-    				var lat_min = bounds.getSouthWest().lat();
-    				var lng_min = bounds.getSouthWest().lng();
-    				var lat_max = bounds.getNorthEast().lat();
-    				var lng_max = bounds.getNorthEast().lng();
-    				var link2analysis = './text/'+token+'_analysis.html';
-    				
-    				console.log("SW: " + bounds.getSouthWest() + " NE: " + bounds.getNorthEast());
-    				console.log("Center: " + map.getCenter().lat() + ", " +  map.getCenter().lng());
-    				getData(lat_min, lng_min, lat_max, lng_max,token);
-                    $("#describeWords").load(link2analysis);
-			})}
-			else {console.log('No scatterplot')}
-		}
-
-
-
-
-
-		function getData(lat_min, lng_min, lat_max, lng_max, token){
-			var lat_min = lat_min.toFixed(2); 
-			var lng_min = lng_min.toFixed(3);
-			var lat_max = lat_max.toFixed(2); 
-			var lng_max = lng_max.toFixed(3);
-
-			console.log("Getting Data: ((" + lat_min + ", " + lng_min + ") (" + lat_max + ", " + lng_max+ "))");
-
-			setAllMap(null);
-			markerArray = [];
-
-			$.getJSON( "http://128.40.150.34:"+port+"/data/tokens_spatial/"+lat_min+"/"+lng_min+"/"+lat_max+"/"+lng_max+"/"+token+"/", function( data ) {
-				$.each(data, function(k,v){
-					
-					var latLng = new google.maps.LatLng(v.points.y, v.points.x);
-					
-					dataArray.push(latLng);
-					
-					var marker = new google.maps.Marker({
-      					position: latLng, 
-      					icon: "./img/icon_" + token + '.png',
-      					customInfo: v.BusinessID				
-      				});
-
-					google.maps.event.addListener(marker, 'click', function(content) {
-						return function(){
-							infowindow.setContent("");
-							
-							//map.setCenter(new google.maps.LatLng(v.points.y, v.points.x));
-							$.getJSON("http://128.40.150.34:"+port+"/data/tokens_spatial/"+this.customInfo, function( data ) {
-								var content = "<b>"+v.BusinessName+"</b>"+"<br/><br/><b>Business ID: </b>"+v.BusinessID+"<br/><b>Business Type: </b> "+v.BusinessType+" <br/><b>Borough: </b> "+v.LocalAuthorityName+"<br/><b>Postcode:</b> "+ v.PostCode +" <br/><b>Rating: </b>"+v.RatingValue;
-						    	infowindow.setContent(content);
-						    });
-			
-						    infowindow.open(map,this);
-						};
-					}(""));
-
-					markerArray.push(marker);
-
-      			});
-
-      			$("#premisesNum").html(data.length);
-      			
-      			setAllMap(map);
-			});
-		}
-
-		google.maps.event.addDomListener(window, 'load', initialize);
-
-	});
-	
-	
-	//  ******************* FUNCTIONS TO USE FOR THE MAP YOU DON"T NEED TO EDIT ANYTHING BELOW THIS LINE **************************************************
-	
-	function createMarkers(){
-		var marker = new google.maps.Marker({
-  			position: latLng 				
-  		});
-	}
-
-	function setAllMap(map) {
-		for (var i = 0; i < markerArray.length; i++) {
-			markerArray[i].setMap(map);
-		}
-	}
-
-	function clearMarkers() {
-		setAllMarkers(null);
-	}
-
-	String.prototype.replaceAll = function(str1, str2, ignore) {
-    	return decodeURIComponent( this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2) );
-	};
-	
-	
-	
-	
-	
-</script>
+      String.prototype.replaceAll = function(str1, str2, ignore) {
+      	return decodeURIComponent( this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2) );
+      };
+      
+      
+      
+      
+      
+   </script>
 
 <div id='wrapper'>
 		<!--sidebar-->
@@ -425,7 +399,7 @@ function setupTokenMap(token){
 		<!--button description slideToggle-->
 		<div id="content1" class="desContent">
 	    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-        </div>
+		</div>
 		<div id="content2" class="methodContent">
 	    <p>ssssssssssssssssssssssssssssssssss</p>
         </div>
@@ -439,15 +413,15 @@ function setupTokenMap(token){
 		<!--filterbar-->
 		   <div id="filterbar" class="rightbar" >
            <button  class="filters"  onclick=filterclick();>F</br>I</br>L</br>T</br>E</br>R</button>
-		   <button id="plotbtn" class="plots"  onclick=plotclick();>P</br>L</br>O</br>T</br>S</button>
+		   <button id="plotbtn" class="plots"  onclick=plotclick();>A</br>N</br>A</br>L</br>Y</br>S</br>I</br>S</button>
 		   </div>
 		
 		<div id="filtermenu" class="fmenu">
-           <p>Tokens</p>
+           <p style="padding-left:10px;line-height:1px">Tokens</p>
 		   
 		   <table class="tokens">
 		   <tr>
-           <td><button><a href="#" id="cafe">Cafe</a></button></td>
+           <td><button id="cafe_btn"><a href="#" id="cafe">Cafe</a></button></td>
            <td><button><a href="#" id="coffee">Coffee</a></button></td>
 		   </tr>
 		   
@@ -477,7 +451,7 @@ function setupTokenMap(token){
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="sainsburys">Sainsburys</a></button></td>
+		   <td><button><a href="#" id="sainsburys">Sainsbury's</a></button></td>
 		   <td><button><a href="#" id="tesco">Tesco</a></button></td>
 		   </tr>
 		   
@@ -486,30 +460,41 @@ function setupTokenMap(token){
 		   </tr>
 		   </table>
 		   
-		   <p>Visualization</p>
+		   <p style="padding-left:10px;line-height:1px">Visualization</p>
 		   <table class="visualization">
 		   <tr>
-		   <td><button><a href="#" id="scatter">Scatter</a></button></td>
+		   <td><button><a href="#" id="income">Income Levels</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="lq">Location Quotation</a></button></td>
+		   <td><button><a href="#" id="lq">Concentration (LQ)</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="lmoran">Local Moran's I</a></button></td>
+		   <td><button><a href="#" id="lmoran">Clustering (LM's Is)</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="gwr">GWR</a></button></td>
+		   <td><button><a href="#" id="gwr">Correlation (GWR)</a></button></td>
 		   </tr>
            </table>
+		   
+		   <p style="padding-left:10px;line-height:1px;">Neighbourhoods</p>
+		   <table class="neighbour">
+		   <tr>
+		   <td><button><a href="#" id="classification">Classification</a></button></td>
+		   </tr>
+		   </table>
 		   
 		   <table class="clearbutton">
 		   <tr>
 		   <td><button><a href="#" id="clear">Reset</a></button></td>
 		   </tr>
 		   </table>
+		   
+		   <div id="describeViz" class="describetab">
+		   <p>sssssssssssssss</p>
+		   </div>
            </div>
 		   
 		 
@@ -521,20 +506,21 @@ function setupTokenMap(token){
 		   
 		   
 	       <div id="describeWords" class="dWords">
-		   <p>sdakhbhsdddddddddddddddddddddddddddddddddd</p>
 		   </div>
 		   
 		   
 		   <div id="plotgraph" class="pgraph" >
 		   
 		   
-		  <img class="plot1"  src="./img/downloadedImage.jpg"  style="width:96%;height:100%;">
-		  <img class="plot1"  src="./img/TOTALtu.jpg"  style="width:96%;height:100%;">
+		  <img id = 'hist' class="plot1"  src= "./img/test.png" style="width:85%;height:95%;">
+		  <img id = 'corr' class="plot1"  src= "./img/test2.png" style="width:85%;height:95%;">
 
           <a class="w3-btn-floating" style="position:absolute;top:45%;left:0;" onclick="plusDivs(-1)">❮</a>
           <a class="w3-btn-floating" style="position:absolute;top:45%;right:22px;" onclick="plusDivs(1)">❯</a> 
 		  </div>
+		  
 		  </div>
+		  
 		  <script>
 		   //  ************* 
           var slideIndex = 1;
@@ -556,7 +542,11 @@ function setupTokenMap(token){
           }
 //  *************
 		   </script>
-		  
-</div>		
+	  
+      <div id="dynamic title" class="dtitle">
+	  <p> Spatial Distribution of the Word</p>
+	  <p id="token-title">Cafe</p>
+      </div>	  
+</div>	
 </body>
 </html>
