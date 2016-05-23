@@ -1,7 +1,9 @@
 function button1()
 {
      $(document).ready(function(){
+	  var link2project ='./text/theProject.html' 
       $("#content1").fadeToggle("slow");
+	  $("#content1").load(link2project);
 	  $("#content2").fadeOut("slow");
 	  $("#content3").fadeOut("slow");
 	  $("#content4").fadeOut("slow");
@@ -23,7 +25,9 @@ function button1()
 function button2()
 {
      $(document).ready(function(){
+	  var link2methodology ='./text/Methodology.html' 
       $("#content2").fadeToggle("slow");
+	   $("#content2").load(link2methodology);
 	  $("#content1").fadeOut("slow");
 	  $("#content3").fadeOut("slow");
 	  $("#content4").fadeOut("slow");
@@ -45,7 +49,9 @@ function button2()
 function button3()
 {
      $(document).ready(function(){
+	  var link2team ='./text/the Team.html' 
       $("#content3").fadeToggle("slow");
+	  $("#content3").load(link2team);
 	  $("#content1").fadeOut("slow");
 	  $("#content2").fadeOut("slow");
 	  $("#content4").fadeOut("slow");
@@ -66,7 +72,9 @@ function button3()
 function button4()
 {
      $(document).ready(function(){
+	  var link2datasources ='./text/Data Sources.html'
       $("#content4").fadeToggle("slow");
+	   $("#content4").load(link2datasources);
 	  $("#content1").fadeOut("slow");
 	  $("#content2").fadeOut("slow");
 	  $("#content3").fadeOut("slow");
@@ -128,3 +136,5 @@ function plotclick()
         return false;
         });		
 }
+
+

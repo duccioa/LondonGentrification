@@ -4,6 +4,7 @@
    <meta http-equiv="X-UA-Compatible" content="chrome=edge">
    <title>London Gentrification</title>
    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+   <link rel="stylesheet" type="text/css" href="./css/highcharts.css" />
    <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7UJ1JbKnBvycoS-SATXKgf7HwUdxWPZA&libraries=visualization"> </script>
    <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
@@ -11,6 +12,13 @@
    <script type="text/javascript"  src="./js/effect.js"></script>
    <script type="text/javascript" src="./js/modernizr_custom_29473.js"></script>
    <script type="text/javascript" src="./js/map_functions.js"></script>
+   
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/heatmap.js"></script>
+<script src="https://code.highcharts.com/modules/treemap.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="./js/highcharts.js"></script>
    <style>
       html, body {
       height: 100%;
@@ -75,6 +83,8 @@
             document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
+			var color_btn = document.getElementById('cafe_btn');
+			cafe_btn.style.backgroundColor="white";
       });
       
       $("#coffee").click( function(event){
@@ -309,7 +319,7 @@
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            //document.getElementById("token-title").innerHTML = token;
+            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
       });
@@ -397,7 +407,7 @@
 		<!--button description slideToggle-->
 		<div id="content1" class="desContent">
 	    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-        </div>
+		</div>
 		<div id="content2" class="methodContent">
 	    <p>ssssssssssssssssssssssssssssssssss</p>
         </div>
@@ -411,15 +421,15 @@
 		<!--filterbar-->
 		   <div id="filterbar" class="rightbar" >
            <button  class="filters"  onclick=filterclick();>F</br>I</br>L</br>T</br>E</br>R</button>
-		   <button id="plotbtn" class="plots"  onclick=plotclick();>P</br>L</br>O</br>T</br>S</button>
+		   <button id="plotbtn" class="plots"  onclick=plotclick();>A</br>N</br>A</br>L</br>Y</br>S</br>I</br>S</button>
 		   </div>
 		
 		<div id="filtermenu" class="fmenu">
-           <p>Tokens</p>
+           <p style="padding-left:10px;line-height:1px">Tokens</p>
 		   
 		   <table class="tokens">
 		   <tr>
-           <td><button><a href="#" id="cafe">Cafe</a></button></td>
+           <td><button id="cafe_btn"><a href="#" id="cafe">Cafe</a></button></td>
            <td><button><a href="#" id="coffee">Coffee</a></button></td>
 		   </tr>
 		   
@@ -458,7 +468,7 @@
 		   </tr>
 		   </table>
 		   
-		   <p>Visualization</p>
+		   <p style="padding-left:10px;line-height:1px">Visualization</p>
 		   <table class="visualization">
 		   <tr>
 		   <td><button><a href="#" id="income">Income Levels</a></button></td>
@@ -477,11 +487,22 @@
 		   </tr>
            </table>
 		   
+		   <p style="padding-left:10px;line-height:1px;">Neighbourhoods</p>
+		   <table class="neighbour">
+		   <tr>
+		   <td><button><a href="#" id="classification">Classification</a></button></td>
+		   </tr>
+		   </table>
+		   
 		   <table class="clearbutton">
 		   <tr>
 		   <td><button><a href="#" id="clear">Reset</a></button></td>
 		   </tr>
 		   </table>
+		   
+		   <div id="describeViz" class="describetab">
+		   <p>sssssssssssssss</p>
+		   </div>
            </div>
 		   
 		 
@@ -529,7 +550,11 @@
           }
 //  *************
 		   </script>
-		  
+	  
+      <div id="dynamic title" class="dtitle">
+	  <p> Spatial Distribution of the Word</p>
+	  <p id="token-title">Cafe</p>
+      </div>	  
 </div>	
 </body>
 </html>

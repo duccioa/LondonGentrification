@@ -45,6 +45,34 @@
       
       
       $(document).ready(function() {
+	  function changecolorToken(num){
+	  for (var i=1; i<=15;i++){
+	  var token_btn = document.getElementById(i+'_btn');
+	  if(i==num)
+	        {
+			token_btn.style.backgroundColor="#383434";
+			}
+	  else
+            {
+			token_btn.style.backgroundColor="#695F5F";
+			}	  
+	  }
+ 	  }
+	  
+	  function changecolorViz(order){
+	  for (var j=1; j<=4;j++){
+	  var viz_btn = document.getElementById(j+'_viz');
+	  if(j==order)
+	        {
+			viz_btn.style.backgroundColor="#383434";
+			}
+	  else
+            {
+			viz_btn.style.backgroundColor="#695F5F";
+			}	  
+	  }
+ 	  }
+	  
       // Register Click events 
       $("#resetLink").click( function(event){
           event.preventDefault();
@@ -61,272 +89,411 @@
       
       // Token buttons
       $("#cafe").click( function(event){
+	  changecolorToken(1);
           token = 'cafe';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-			var color_btn = document.getElementById('cafe_btn');
-			cafe_btn.style.backgroundColor="white";
+			
+			
       });
       
       $("#coffee").click( function(event){
+	  changecolorToken(2);
           token = 'coffee';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
+			
       });
       
       $("#pizza").click( function(event){
+	    changecolorToken(3);
           token = 'pizza';
           viz = null;
+            document.getElementById("token-title").innerHTML = token;		  
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+      	  
+	  });
       
       $("#wine").click( function(event){
+	  	changecolorToken(4); 
           token = 'wine';
           viz = null;
+           document.getElementById("token-title").innerHTML = token;		  
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		     
+	  });
       
       $("#grill").click( function(event){
+	  changecolorToken(5);  
           token = 'grill';
           viz = null;
+            document.getElementById("token-title").innerHTML = token;		  
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			    
+	  });
       
       $("#sushi").click( function(event){
+	  changecolorToken(6);
           token = 'sushi';
           viz = null;
+		 document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			      
+	  });
       
       $("#thai").click( function(event){
+	  changecolorToken(7); 
           token = 'thai';
           viz = null;
+		   document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			    
+	 });
       
       $("#chicken").click( function(event){
+	  	changecolorToken(8);  
           token = 'chicken';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		    
+	  });
       
       $("#fried").click( function(event){
+	  changecolorToken(9);
           token = 'fried';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			
+			});
       
       $("#fish").click( function(event){
+	  	changecolorToken(10); 
           token = 'fish';
           viz = null;
+		 document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
+ 
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		    
+	 });
       
       $("#kebab").click( function(event){
+	  changecolorToken(11); 
           token = 'kebab';
           viz = null;
+		 document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			
+ });
       $("#waitrose").click( function(event){
+	  	changecolorToken(12);
           token = 'waitrose';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		
+			});
       
-      $("#sainsbury").click( function(event){
+  
+  $("#sainsbury").click( function(event){
+  changecolorToken(13);  
           token = 'sainsbury';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
+
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+ 			   
+			});
       
       $("#tesco").click( function(event){
+	  changecolorToken(14);
           token = 'tesco';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2corr = './img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			});
       
       $("#costcutter").click( function(event){
+	  changecolorToken(15); 
           viz = null;
-          token = 'costcutter';
+          token = 'costcutter';  
+		  document.getElementById("token-title").innerHTML = token;
             toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
             var link2hist = './public_html/img/'+token+'_histogram.png';
-            var link2corr = './public_html/img/'+token+'_scatter.png';
+            var link2corr = './public_html/img/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
+          
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			
+ });
       
+	  //legend function
+	  
+	  function legendclick(number)
+{ 
+	  if(number==1)
+	        {
+			$("#legend").fadeIn("slow");
+			$("#legendtitle").text("Income Level");
+		    $("#textbox_1").text("income");
+            $("#textbox_2").text("income");
+			$("#textbox_3").text("income");
+			$("#textbox_4").text("income");
+			$("#textbox_5").text("income");
+			$("#textbox_6").text("income");
+			$("#textbox_7").text("income");
+			document.getElementById("textbox_5").style.color="white";
+			document.getElementById("textbox_6").style.color="white";
+			document.getElementById("textbox_7").style.color="white";
+			document.getElementById("box_1").style.backgroundColor="red";
+			document.getElementById("box_2").style.backgroundColor="red";
+			document.getElementById("box_3").style.backgroundColor="red";
+			document.getElementById("box_4").style.backgroundColor="red";
+			document.getElementById("box_5").style.backgroundColor="red";
+			document.getElementById("box_6").style.backgroundColor="red";
+			document.getElementById("box_7").style.backgroundColor="red";
+			}
+	  else if(number==2)
+            {
+			$("#legend").fadeIn("slow");
+			$("#legendtitle").text("Local Quotation");
+		    $("#textbox_1").text("lq");
+            $("#textbox_2").text("lq");
+			$("#textbox_3").text("lq");
+			$("#textbox_4").text("lq");
+			$("#textbox_5").text("lq");
+			$("#textbox_6").text("lq");
+			$("#textbox_7").text("lq");
+			document.getElementById("textbox_5").style.color="white";
+			document.getElementById("textbox_6").style.color="white";
+			document.getElementById("textbox_7").style.color="white";
+			document.getElementById("box_1").style.backgroundColor="blue";
+			document.getElementById("box_2").style.backgroundColor="blue";
+			document.getElementById("box_3").style.backgroundColor="blue";
+			document.getElementById("box_4").style.backgroundColor="blue";
+			document.getElementById("box_5").style.backgroundColor="blue";
+			document.getElementById("box_6").style.backgroundColor="blue";
+			document.getElementById("box_7").style.backgroundColor="blue";
+			}	 
+		else if(number==3)
+            {
+			$("#legend").fadeIn("slow");
+			$("#legendtitle").text("Local Morans");
+		    $("#textbox_1").text("moran");
+            $("#textbox_2").text("moran");
+			$("#textbox_3").text("moran");
+			$("#textbox_4").text("moran");
+			$("#textbox_5").text("moran");
+			$("#textbox_6").text("moran");
+			$("#textbox_7").text("moran");
+			document.getElementById("textbox_5").style.color="white";
+			document.getElementById("textbox_6").style.color="white";
+			document.getElementById("textbox_7").style.color="white";
+			document.getElementById("box_1").style.backgroundColor="pink";
+			document.getElementById("box_2").style.backgroundColor="pink";
+			document.getElementById("box_3").style.backgroundColor="pink";
+			document.getElementById("box_4").style.backgroundColor="pink";
+			document.getElementById("box_5").style.backgroundColor="pink";
+			document.getElementById("box_6").style.backgroundColor="pink";
+			document.getElementById("box_7").style.backgroundColor="pink";
+			}		
+			else if(number==4)
+            {
+			$("#legend").fadeIn("slow");
+			$("#legendtitle").text("Classification");
+		    $("#textbox_1").text("classification");
+            $("#textbox_2").text("classification");
+			$("#textbox_3").text("classification");
+			$("#textbox_4").text("classification");
+			$("#textbox_5").text();
+			$("#textbox_6").text();
+			$("#textbox_7").text();
+			document.getElementById("textbox_5").style.color="#695F5F";
+			document.getElementById("textbox_6").style.color="#695F5F";
+			document.getElementById("textbox_7").style.color="#695F5F";
+			
+			document.getElementById("box_1").style.backgroundColor="green";
+			document.getElementById("box_2").style.backgroundColor="green";
+			document.getElementById("box_3").style.backgroundColor="green";
+			document.getElementById("box_4").style.backgroundColor="green";
+			document.getElementById("box_5").style.backgroundColor="#695F5F";
+			document.getElementById("box_6").style.backgroundColor="#695F5F";
+			document.getElementById("box_7").style.backgroundColor="#695F5F";
+			}	
+			else
+			{
+			$("#legend").hide("slow");
+			
+			}
+	  }
+
+	  
       // Visualisation buttons		
-       $("#income").click( function(event){
+       $("#income").click( function(event){ 
+	    legendclick(1);
+	     changecolorViz(1);
+		 
           var viz = 'income';
           var link2description = './text/'+viz+'_description.html';
           toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
           setupTokenMap(token);
           $("#describeViz").load(link2description);
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-      });
+	  });
       
       $("#lq").click( function(event){
+	  	 legendclick(2);
+	  changecolorViz(2); 
+	 
           var viz = 'lq';
           var link2description = './text/'+viz+'_description.html';
           setAllMap(null);
@@ -334,8 +501,13 @@
           google.maps.event.clearListeners(map, 'dragend');
           $("#describeViz").load(link2description);
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-      });
+          
+  });
+  
       $("#lmoran").click( function(event){
+	    legendclick(3);
+	   changecolorViz(3); 
+	 
           var viz = 'lmoran';
           var link2description = './text/'+viz+'_description.html';
           event.preventDefault();
@@ -344,8 +516,17 @@
           google.maps.event.clearListeners(map, 'dragend');
           $("#describeViz").load(link2description);
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+          
+  });
+       
+	  
+	  //neighbourhoods button
+	  $("#classification").click( function(event){
+	    legendclick(4);
+         classif_btn.style.backgroundColor="#383434";
+		 
       });
-      
+	  
       function initialize() {
         token = 'cafe'; // first page shows results for cafe
         viz = null; //first page shows scatter plot of premises
@@ -398,16 +579,24 @@
 		
 		<!--button description slideToggle-->
 		<div id="content1" class="desContent">
+		<div id="innercontent1" class="innerdesContent">
 	    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 		</div>
+		</div>
 		<div id="content2" class="methodContent">
-	    <p>ssssssssssssssssssssssssssssssssss</p>
+	    <div id="innercontent2" class="innermethodContent">
+	    <p>ffffffffffffffffffffffffffffffffff</p>
+		</div>
         </div>
 		<div id="content3" class="graphsContent">
-	    <p>fffffffffffffffffffffffff</p>
+	    <div id="innercontent3" class="innergraphsContent">
+	    <p>gggggggggggggggggggggggggggg</p>
+		</div>
         </div>
 		<div id="content4" class="dataContent">
-	    <p>hhhhhhhhhhhhhhhhhhhhhhhhh</p>
+	    <div id="innercontent4" class="innerdataContent">
+	    <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+		</div>
         </div>
 		
 		<!--filterbar-->
@@ -421,74 +610,66 @@
 		   
 		   <table class="tokens">
 		   <tr>
-           <td><button id="cafe_btn"><a href="#" id="cafe">Cafe</a></button></td>
-           <td><button><a href="#" id="coffee">Coffee</a></button></td>
+           <td><button id="1_btn"><a href="#" id="cafe">Cafe</a></button></td>
+           <td><button id="2_btn"><a href="#" id="coffee">Coffee</a></button></td>
 		   </tr>
 		   
 		   <tr>
-           <td><button><a href="#" id="pizza">Pizza</a></button></td>
-           <td><button><a href="#" id="grill">Grill</a></button></td>
+           <td><button id="3_btn"><a href="#" id="pizza">Pizza</a></button></td>
+           <td><button id="4_btn"><a href="#" id="wine">Wine</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="wine">Wine</a></button></td>
-		   <td><button><a href="#" id="sushi">Sushi</a></button></td>
+		   <td><button id="5_btn"><a href="#" id="grill">Grill</a></button></td>
+		   <td><button id="6_btn"><a href="#" id="sushi">Sushi</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="thai">Thai</a></button></td>
-		   <td><button><a href="#" id="chicken">Chicken</a></button></td>
+		   <td><button id="7_btn"><a href="#" id="thai">Thai</a></button></td>
+		   <td><button id="8_btn"><a href="#" id="chicken" >Chicken</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="fried">Fried</a></button></td>
-		   <td><button><a href="#" id="fish">Fish</a></button></td>
+		   <td><button id="9_btn"><a href="#" id="fried" >Fried</a></button></td>
+		   <td><button id="10_btn"><a href="#" id="fish" >Fish</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="kebab">Kebab</a></button></td>
-		   <td><button><a href="#" id="waitrose">Waitrose</a></button></td>
+		   <td><button id="11_btn"><a href="#" id="kebab" >Kebab</a></button></td>
+		   <td><button id="12_btn"><a href="#" id="waitrose" >Waitrose</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="sainsburys">Sainsbury's</a></button></td>
-		   <td><button><a href="#" id="tesco">Tesco</a></button></td>
+		   <td><button id="13_btn"><a href="#" id="sainsbury" >Sainsbury</a></button></td>
+		   <td><button id="14_btn"><a href="#" id="tesco" >Tesco</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="costcutter">Costcutter</a></button></td>
+		   <td><button id="15_btn"><a href="#" id="costcutter" >Costcutter</a></button></td>
 		   </tr>
 		   </table>
 		   
 		   <p style="padding-left:10px;line-height:1px">Visualization</p>
 		   <table class="visualization">
 		   <tr>
-		   <td><button><a href="#" id="income">Income Levels</a></button></td>
+		   <td><button id="1_viz"><a href="#" id="income" >Income Levels</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="lq">Concentration (LQ)</a></button></td>
+		   <td><button id="2_viz"><a href="#" id="lq" >Concentration (LQ)</a></button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="lmoran">Clustering (LM's Is)</a></button></td>
+		   <td><button id="3_viz"><a href="#" id="lmoran" >Clustering (LM's Is)</a></button></td>
 		   </tr>
 		   
-		   <tr>
-		   <td><button><a href="#" id="gwr">Correlation (GWR)</a></button></td>
-		   </tr>
+		 
            </table>
 		   
 		   <p style="padding-left:10px;line-height:1px;">Neighbourhoods</p>
 		   <table class="neighbour">
 		   <tr>
-		   <td><button><a href="#" id="classification">Classification</a></button></td>
-		   </tr>
-		   </table>
-		   
-		   <table class="clearbutton">
-		   <tr>
-		   <td><button><a href="#" id="clear">Reset</a></button></td>
+		   <td><button id="classif_btn"><a href="#" id="classification" class="classif_link">Classification</a></button></td>
 		   </tr>
 		   </table>
 		   
@@ -546,7 +727,65 @@
       <div id="dynamic title" class="dtitle">
 	  <p> Spatial Distribution of the Word</p>
 	  <p id="token-title">Cafe</p>
-      </div>	  
-</div>	
+      </div>	
+
+       <div id="legend" class="colorlegend">
+	   <h2 id="legendtitle" style="margin-left:7%;margin-top:10%;font-size:20px; float:left;">Legend</h2>
+	      <div id="colorbox_1"  class="legendbox_1">
+	        <div id="box_1" class="cbox_1">
+	        </div>
+	        <div id="text_1" class="tbox_1">
+			<p id="textbox_1" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+		  
+          <div id="colorbox_2"  class="legendbox_2">
+	        <div id="box_2" class="cbox_2">
+	        </div>
+	        <div id="text_2" class="tbox_2">
+			<p id="textbox_2" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>	
+
+          <div id="colorbox_3"  class="legendbox_3">
+	        <div id="box_3" class="cbox_3">
+	        </div>
+	        <div id="text_3" class="tbox_3">
+			<p id="textbox_3" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+
+          <div id="colorbox_4"  class="legendbox_4">
+	        <div id="box_4" class="cbox_4">
+	        </div>
+	        <div id="text_4" class="tbox_4">
+			<p id="textbox_4" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+
+          <div id="colorbox_5"  class="legendbox_5">
+	        <div id="box_5" class="cbox_5">
+	        </div>
+	        <div id="text_5" class="tbox_5">
+			<p id="textbox_5" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+
+          <div id="colorbox_6"  class="legendbox_6">
+	        <div id="box_6" class="cbox_6">
+	        </div>
+	        <div id="text_6" class="tbox_6">
+			<p id="textbox_6" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>	
+ 
+          <div id="colorbox_7"  class="legendbox_7">
+	        <div id="box_7" class="cbox_7">
+	        </div>
+	        <div id="text_7" class="tbox_7">
+			<p id="textbox_7" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div> 
+      </div>	
 </body>
 </html>
