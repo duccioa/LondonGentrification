@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=edge"> 
+		<title>Highcharts</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+   <style>
+      html, body {
+      height: 100%;
+      margin:0;
+      padding: 0;
+      }
+   </style>
+	</head>
+	<p><strong>Methodology</strong></p>
+<p><strong>Step 1 &ndash; Obtain data:</strong> Food business names and locations were obtained using data from the Foods Standards Agency Database. Income data by ward and ward boundaries were obtained from the Greater London Authority</p>
+<p><strong>Step 2 &ndash; Clean Data:</strong> The business names were split into individual words. The frequency of each word was charted and the spatial location mapped. Common words were chosen for closer analysis based on the preliminary patterns identified.&nbsp;</p>
+<p><strong>Step 3 &ndash; Spatial Analysis: </strong></p>
+<p>Using Python, spatial analysis techniques were applied to the data to identify wards in London where certain words are unusually clustered or concentrated.</p>
+<ul>
+<li><strong>Count of word tokens: </strong>Measures the number of food business names containing particular words per ward.</li>
+</ul>
+<p>&nbsp&nbsp Calculated by performing a spatial join of word tokens and ward polygons.</p>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Kernel Density Estimate (KDE) of word tokens per ward:</strong> Infers the density of businesses containing a particular word in their name at each ward centroid.</li>
+</ul>
+<p>&nbsp&nbsp A kernel density surface was generated for each word. Density is higher in areas close to numerous businesses containing a particular word token in their name. <br> &nbsp&nbsp From this surface, the density of the surface at the centroid of each ward was calculated.</p>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Location Quotient: </strong>The location quotient quantifies concentration of a word token as a ratio comparing concentration in the local area (ward) by the global area (city).</li>
+</ul>
+<p>&nbsp&nbsp For the final map, concentration was measured by dividing the KDE for the word token by the KDE calculated for all food businesses. High values indicate a higher <br>&nbsp&nbsp concentration.</p>
+<p><strong>&nbsp;</strong></p>
+<ul>
+<li><strong>Spatial Autocorrelation: </strong>Measures the degree to which the calculated centroid KDEs density of businesses containing a particular word in their name are clustered in space.</li>
+</ul>
+<p>&nbsp&nbsp The local Moran&rsquo;s I statistic was calculated for each ward. The local Moran&rsquo;s takes into account the deviation of the calculated statistic for each ward from the <br>&nbsp&nbsp mean in relation to the values of neighboring wards. For the final map only statistically significant results are shown (p &lt; 0.05). High values of Moran&rsquo;s I <br>&nbsp&nbsp indicated high levels of clustering.</p>
+<p><strong>&nbsp;</strong></p>
+<ul>
+<li><strong>Correlation and Regression: </strong>Measures the degree to which the density of businesses containing a particular word in their name and median income are related.</li>
+</ul>
+<p>&nbsp&nbsp Measured by plotting the line of best fit between density and income for each token.</p>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Clustering:</strong> Identifies similar areas by grouping wards together based on similar values.</li>
+</ul>
+<p>&nbsp&nbsp Hierarchical clustering was used for the variables &lsquo;income&rsquo;, &lsquo;coffee LQ&rsquo;, &lsquo;chicken LQ&rsquo;, &lsquo;Thai LQ&rsquo; and &lsquo;kebab LQ&rsquo; to produce four distinct categories, <br>&nbsp&nbsp reflecting the consumer preferences of different areas of the city.</p>
+   
+	
+	
+<body>
+</body>
+</html>

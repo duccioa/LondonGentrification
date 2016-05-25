@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 		<link rel="stylesheet" type="text/css" href="./css/highcharts.css" />
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
    <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/heatmap.js"></script>
 <script src="https://code.highcharts.com/modules/treemap.js"></script>
@@ -28,20 +29,35 @@
 <p><strong>Summary</strong></p>
 <p><strong>What&rsquo;s for Lunch? - Gentrification and Consumer Preference</strong></p>
 <p>This project selects common words appearing in the names of food businesses in London, revealing fascinating spatial differences in what people from high and low income areas in London buy for lunch.</p>
-<p>This website allows you to explore these patterns for yourself using the options on the interactive map to select different word tokens. What&rsquo;s for lunch where you live? Where does your area sit in the food gentrification classification?</p>
-
-<div id="token_frequency" ></div>
-
+<p>This website allows you to explore these patterns for yourself, using the options available on the far right of the interactive map to select different word tokens. What&rsquo;s for lunch where you live? Where does your area sit in the food gentrification classification?</p>
 <p><strong>Background:</strong></p>
-<p>Gentrification: The term used to describe the phenomenon where many traditionally working class and industrial areas of the inner city are becoming dominated by middle class residents.</p>
+<p>Gentrification: The term used to describe the phenomenon where many traditionally working-class and industrial areas of the inner city are becoming dominated by middle-class residents.</p>
 <p>In addition to renovated flats, it is widely noted that areas that become gentrified experience a broad cultural shift. Retail and entertainment spaces change to suit consumer tastes. Boutique coffee shops replace standard fried food joints. These retailers are held up as symbols of gentrification, becoming the focus of social unrest caused by the pricing out of low-income residents, such as the infamous protest at the Shoreditch &lsquo;Cereal Killer Caf&eacute;&rsquo; in late 2015. &nbsp;</p>
+<p><strong>London-Wide Statistical Overview</strong></p>
+<p>This project applied statistical and spatial analysis techniques to common words found in the names of food businesses in London (Food Standards Agency Database). The resulting analysis reveals strong spatial segregation in consumer preferences for common food business types across high and low income areas. From these results, a four category classification for London wards has been developed based on a clustering of significant variables.</p>
+<p>Initial exploration of the data reveals that the word &lsquo;caf&eacute;&rsquo; is by far the most common single word in London food business names, followed by &lsquo;food&rsquo;, &lsquo;restaurant&rsquo; and &lsquo;bar&rsquo;. Scroll over the chart below to reveal all the top 50 most common words.</p>
+<br>
+<br>
+<div id="token_frequency" ></div>
+<br>
+<br>
 
+
+<p>From the results preliminary information, the group together settled on the 15 words below which showed promising patterns. The chart below shows a box and whisker plot representation of the distribution of each word token according to the underlying median ward income. Already some clear differences in distribution are evident, with the words &lsquo;caf&eacute;&rsquo;, &lsquo;coffee&rsquo;, &lsquo;sushi&rsquo; and &lsquo;waitrose&rsquo; with significantly more food businesses containing these words located in wards with higher median incomes. Scroll over the chart below to explore the values at each quartile.</p>
+<br>
+<br>
 <div id="box_plot" ></div>
-
-<p>This project applied statistical and spatial analysis techniques to common word tokens found in the names of food businesses in London (Food Standards Agency Database). The resulting analysis reveals strong spatial segregation in consumer preferences for common food business types across high and low income areas. From these results a four category classification for London wards has been developed based on a clustering of significant variables.</p>
-
+<br>
+<br>
+<p>These patterns are also evident in the interactive chart below. Click to zoom in and see the division in the number of food business names containing a particular word token between the lower and higher 50% of all wards according to median income.</p>
+<br>
+<br>
 <div id="treemap" ></div>
 
-		
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

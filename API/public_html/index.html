@@ -2,6 +2,8 @@
 <head>
    <meta charset="UTF-8" />
    <meta http-equiv="X-UA-Compatible" content="chrome=edge">
+   <meta name="description" content="London Gentrification">
+   <meta name="keywords" content="HTML, CSS, Javascript">
    <title>London Gentrification</title>
    <link rel="stylesheet" type="text/css" href="./css/style.css" />
    <link rel="stylesheet" type="text/css" href="./css/highcharts.css" />
@@ -12,7 +14,6 @@
    <script type="text/javascript"  src="./js/effect.js"></script>
    <script type="text/javascript" src="./js/modernizr_custom_29473.js"></script>
    <script type="text/javascript" src="./js/map_functions.js"></script>
-   
    <script src="https://code.highcharts.com/highcharts.js"></script>
    <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/heatmap.js"></script>
@@ -36,6 +37,7 @@
       var dataArray = [];
       var infowindow = new google.maps.InfoWindow({maxWidth: 300});
       var port = 8866;
+      var token = 'cafe';
         var bounds;
         var lat_min;
         var lng_min;
@@ -48,293 +50,321 @@
         var borough_json;
         var polygonDisplayed = false;
         var polygonDrawn = false;
+        var token_btn;
+        var viz_btn;
 
       
-      
-      
       $(document).ready(function() {
-      // Register Click events 
-      $("#resetLink").click( function(event){
-          event.preventDefault();
-          location.reload();
-      });
-      
-      $("#clearLink").click( function(event){
-          event.preventDefault();
-          //Clear Markers
-          setAllMap(null);
-          google.maps.event.clearListeners(map, 'dragend');
-          $("#photoNum").html("0");
-      });
-      
+	  
       // Token buttons
-      $("#cafe").click( function(event){
+      $("#1_btn").click( function(event){
+	  changecolorToken(1);
           token = 'cafe';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-			var color_btn = document.getElementById('cafe_btn');
-			cafe_btn.style.backgroundColor="white";
+			
+			
       });
       
-      $("#coffee").click( function(event){
+      $("#2_btn").click( function(event){
+	  changecolorToken(2);
           token = 'coffee';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
+			
       });
       
-      $("#pizza").click( function(event){
+      $("#3_btn").click( function(event){
+	    changecolorToken(3);
           token = 'pizza';
           viz = null;
+            document.getElementById("token-title").innerHTML = token;		  
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+      	  
+	  });
       
-      $("#wine").click( function(event){
+      $("#4_btn").click( function(event){
+	  	changecolorToken(4); 
           token = 'wine';
           viz = null;
+           document.getElementById("token-title").innerHTML = token;		  
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		     
+	  });
       
-      $("#grill").click( function(event){
+      $("#5_btn").click( function(event){
+	  changecolorToken(5);  
           token = 'grill';
           viz = null;
+            document.getElementById("token-title").innerHTML = token;		  
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			    
+	  });
       
-      $("#sushi").click( function(event){
+      $("#6_btn").click( function(event){
+	  changecolorToken(6);
           token = 'sushi';
           viz = null;
+		 document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			      
+	  });
       
-      $("#thai").click( function(event){
+      $("#7_btn").click( function(event){
+	  changecolorToken(7); 
           token = 'thai';
           viz = null;
+		   document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			    
+	 });
       
-      $("#chicken").click( function(event){
+      $("#8_btn").click( function(event){
+	  	changecolorToken(8);  
           token = 'chicken';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		    
+	  });
       
-      $("#fried").click( function(event){
+      $("#9_btn").click( function(event){
+	  changecolorToken(9);
           token = 'fried';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			
+			});
       
-      $("#fish").click( function(event){
+      $("#10_btn").click( function(event){
+	  	changecolorToken(10); 
           token = 'fish';
           viz = null;
+		 document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
+ 
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		    
+	 });
       
-      $("#kebab").click( function(event){
+      $("#11_btn").click( function(event){
+	  changecolorToken(11); 
           token = 'kebab';
           viz = null;
+		 document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
-      $("#waitrose").click( function(event){
+			
+ });
+      $("#12_btn").click( function(event){
+	  	changecolorToken(12);
           token = 'waitrose';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+		
+			});
       
-      $("#sainsbury").click( function(event){
+  
+  $("#13_btn").click( function(event){
+  changecolorToken(13);  
           token = 'sainsbury';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
+
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+ 			   
+			});
       
-      $("#tesco").click( function(event){
+      $("#14_btn").click( function(event){
+	  changecolorToken(14);
           token = 'tesco';
           viz = null;
+		  document.getElementById("token-title").innerHTML = token;
           toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './img/'+token+'_histogram.png';
-            var link2corr = './img/'+token+'_scatter.png';
+            var link2hist = './img/graphs/'+token+'_histogram.png';
+            var link2corr = './img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			});
       
-      $("#costcutter").click( function(event){
+      $("#15_btn").click( function(event){
+	  changecolorToken(15); 
           viz = null;
-          token = 'costcutter';
+          token = 'costcutter';  
+		  document.getElementById("token-title").innerHTML = token;
             toggleMap(false);
             var link2analysis = './text/'+token+'_analysis.html';
-            var link2hist = './public_html/img/'+token+'_histogram.png';
-            var link2corr = './public_html/img/'+token+'_scatter.png';
+            var link2hist = './public_html/img/graphs/'+token+'_histogram.png';
+            var link2corr = './public_html/img/graphs/'+token+'_income_scatter.png';
             event.preventDefault();
             setAllMap(null);//Clear Markers
             setupTokenMap(token);
             console.log('Setup the filter to ' + token + " and visualisation to " + viz);
             $("#describeWords").load(link2analysis);
-            document.getElementById("token-title").innerHTML = token;
+          
             document.getElementById('hist').src=link2hist;
             document.getElementById('corr').src=link2corr;
-      });
+			
+ });
       
+
+
+	  
       // Visualisation buttons		
-       $("#income").click( function(event){
+       $("#1_viz").click( function(event){ 
+	    legendclick(1);
+	     changecolorViz(1);
+		 
           var viz = 'income';
           var link2description = './text/'+viz+'_description.html';
           toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
           setupTokenMap(token);
           $("#describeViz").load(link2description);
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-      });
+	  });
       
-      $("#lq").click( function(event){
+      $("#2_viz").click( function(event){
+	  	 legendclick(2);
+	  changecolorViz(2); 
+	 
           var viz = 'lq';
           var link2description = './text/'+viz+'_description.html';
           setAllMap(null);
@@ -342,8 +372,13 @@
           google.maps.event.clearListeners(map, 'dragend');
           $("#describeViz").load(link2description);
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
-      });
-      $("#lmoran").click( function(event){
+          
+  });
+  
+      $("#3_viz").click( function(event){
+	    legendclick(3);
+	   changecolorViz(3); 
+	 
           var viz = 'lmoran';
           var link2description = './text/'+viz+'_description.html';
           event.preventDefault();
@@ -351,6 +386,28 @@
           toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
           google.maps.event.clearListeners(map, 'dragend');
           $("#describeViz").load(link2description);
+          console.log('Setup the filter to ' + token + " and visualisation to " + viz);
+          
+  });
+       
+	  
+	  //neighbourhoods button
+	  $("#classif_btn").click( function(event){
+	    legendclick(4);
+         classif_btn.style.backgroundColor="#383434";
+         
+         var viz = 'clusters';
+         var link2description = './text/'+viz+'_description.html';
+         var link2analysis = './text/clusters_analysis.html';
+         var link2histClust = './img/graphs/cluster_histogram.png'
+         event.preventDefault();
+         setAllMap(null);
+         toggleMap(true,function(){changeViz('fillColor', setupViz(viz));});
+		 google.maps.event.clearListeners(map, 'dragend');
+          $("#describeViz").load(link2description);
+          $("#describeWords").load(link2analysis);
+          document.getElementById('hist').src=link2histClust;
+          document.getElementById('corr').src=link2histClust;
           console.log('Setup the filter to ' + token + " and visualisation to " + viz);
       });
       
@@ -360,8 +417,8 @@
         
         var mapOptions = {
           center: new google.maps.LatLng(51.514756, -0.104345),
-          zoom: 10,
-          	styles: darkMap
+          zoom: 11,
+          styles: darkMap
         };
       console.log('Initialise map');
       $.get('data/geo/London_Ward_CityMerged_WGS84.geojson', function(data) {
@@ -395,27 +452,32 @@
 		<!--sidebar-->
 	    <div id="sidebar" class="bar" style="text-align:left;">
 		<div class="title">
-		<a href="index.html" style=" color:white;">London Gentrification</a>
+		<a href="index.html" style=" color:white;">What's for lunch</a>
+		<p style = "font-size:0.9em;">Food habits and gentrification in London</p>
 		</div>
 		<input name="button1" type="button" value="The Project" class="button description" onclick=button1();>
         <input name="button2" type="button" value="Methodology" class="button methodology" onclick=button2();>
-		<input name="button3" type="button" value="Team" class="button graphs" onclick=button3();>
+		<input name="button3" type="button" value="The Team" class="button graphs" onclick=button3();>
         <input name="button4" type="button" value="Data Sources" class="button data" onclick=button4();>
 
 		</div>
 		
 		<!--button description slideToggle-->
 		<div id="content1" class="desContent">
-	    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+		<div id="innercontent1" class="innerdesContent">
 		</div>
-		<div id="content2" class="methodContent">
-	    <p>ssssssssssssssssssssssssssssssssss</p>
+		</div>
+		<div id="content2" class="desContent">
+	    <div id="innercontent2" class="innerdesContent">
+		</div>
         </div>
-		<div id="content3" class="graphsContent">
-	    <p>fffffffffffffffffffffffff</p>
+		<div id="content3" class="desContent">
+	    <div id="innercontent3" class="innerdesContent">
+		</div>
         </div>
 		<div id="content4" class="dataContent">
-	    <p>hhhhhhhhhhhhhhhhhhhhhhhhh</p>
+	    <div id="innercontent4" class="innerdataContent">
+		</div>
         </div>
 		
 		<!--filterbar-->
@@ -429,79 +491,70 @@
 		   
 		   <table class="tokens">
 		   <tr>
-           <td><button id="cafe_btn"><a href="#" id="cafe">Cafe</a></button></td>
-           <td><button><a href="#" id="coffee">Coffee</a></button></td>
+           <td><button id="1_btn">Cafe</button></td>
+           <td><button id="2_btn">Coffee</button></td>
 		   </tr>
 		   
 		   <tr>
-           <td><button><a href="#" id="pizza">Pizza</a></button></td>
-           <td><button><a href="#" id="grill">Grill</a></button></td>
+           <td><button id="3_btn">Pizza</button></td>
+           <td><button id="4_btn">Wine</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="wine">Wine</a></button></td>
-		   <td><button><a href="#" id="sushi">Sushi</a></button></td>
+		   <td><button id="5_btn">Grill</button></td>
+		   <td><button id="6_btn">Sushi</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="thai">Thai</a></button></td>
-		   <td><button><a href="#" id="chicken">Chicken</a></button></td>
+		   <td><button id="7_btn">Thai</button></td>
+		   <td><button id="8_btn">Chicken</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="fried">Fried</a></button></td>
-		   <td><button><a href="#" id="fish">Fish</a></button></td>
+		   <td><button id="9_btn">Fried</button></td>
+		   <td><button id="10_btn">Fish</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="kebab">Kebab</a></button></td>
-		   <td><button><a href="#" id="waitrose">Waitrose</a></button></td>
+		   <td><button id="11_btn">Kebab</button></td>
+		   <td><button id="12_btn">Waitrose</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="sainsburys">Sainsbury's</a></button></td>
-		   <td><button><a href="#" id="tesco">Tesco</a></button></td>
+		   <td><button id="13_btn">Sainsbury</button></td>
+		   <td><button id="14_btn">Tesco</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="costcutter">Costcutter</a></button></td>
+		   <td><button id="15_btn">Costcutter</button></td>
 		   </tr>
 		   </table>
 		   
 		   <p style="padding-left:10px;line-height:1px">Visualization</p>
 		   <table class="visualization">
 		   <tr>
-		   <td><button><a href="#" id="income">Income Levels</a></button></td>
+		   <td><button id="1_viz">Income Levels</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="lq">Concentration (LQ)</a></button></td>
+		   <td><button id="2_viz">Concentration (LQ)</button></td>
 		   </tr>
 		   
 		   <tr>
-		   <td><button><a href="#" id="lmoran">Clustering (LM's Is)</a></button></td>
+		   <td><button id="3_viz">Clustering (LM's Is)</button></td>
 		   </tr>
 		   
-		   <tr>
-		   <td><button><a href="#" id="gwr">Correlation (GWR)</a></button></td>
-		   </tr>
+		 
            </table>
 		   
 		   <p style="padding-left:10px;line-height:1px;">Neighbourhoods</p>
 		   <table class="neighbour">
 		   <tr>
-		   <td><button><a href="#" id="classification">Classification</a></button></td>
-		   </tr>
-		   </table>
-		   
-		   <table class="clearbutton">
-		   <tr>
-		   <td><button><a href="#" id="clear">Reset</a></button></td>
+		   <td><button id="classif_btn">Classification</button></td>
 		   </tr>
 		   </table>
 		   
 		   <div id="describeViz" class="describetab">
-		   <p>sssssssssssssss</p>
 		   </div>
            </div>
 		   
@@ -520,8 +573,8 @@
 		   <div id="plotgraph" class="pgraph" >
 		   
 		   
-		  <img id = 'hist' class="plot1"  src= "./img/test.png" style="width:85%;height:95%;">
-		  <img id = 'corr' class="plot1"  src= "./img/test2.png" style="width:85%;height:95%;">
+		  <img id = 'hist' class="plot1"  src= "./img/graphs/cafe_income_scatter.png" style="width:83%;height:95%;margin-left:7%;">
+		  <img id = 'corr' class="plot1"  src= "./img/graphs/cafe_histogram.png" style="width:83%;height:95%;margin-left:7%;">
 
           <a class="w3-btn-floating" style="position:absolute;top:45%;left:0;" onclick="plusDivs(-1)">❮</a>
           <a class="w3-btn-floating" style="position:absolute;top:45%;right:22px;" onclick="plusDivs(1)">❯</a> 
@@ -552,9 +605,67 @@
 		   </script>
 	  
       <div id="dynamic title" class="dtitle">
-	  <p> Spatial Distribution of the Word</p>
+	  <p>Token (word) displayed:</p>
 	  <p id="token-title">Cafe</p>
-      </div>	  
-</div>	
+      </div>	
+
+       <div id="legend" class="colorlegend">
+	   <h2 id="legendtitle" style="margin-left:7%;margin-top:10%;font-size:20px; float:left;">Legend</h2>
+	      <div id="colorbox_1"  class="legendbox_1">
+	        <div id="box_1" class="cbox_1">
+	        </div>
+	        <div id="text_1" class="tbox_1">
+			<p id="textbox_1" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+		  
+          <div id="colorbox_2"  class="legendbox_2">
+	        <div id="box_2" class="cbox_2">
+	        </div>
+	        <div id="text_2" class="tbox_2">
+			<p id="textbox_2" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>	
+
+          <div id="colorbox_3"  class="legendbox_3">
+	        <div id="box_3" class="cbox_3">
+	        </div>
+	        <div id="text_3" class="tbox_3">
+			<p id="textbox_3" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+
+          <div id="colorbox_4"  class="legendbox_4">
+	        <div id="box_4" class="cbox_4">
+	        </div>
+	        <div id="text_4" class="tbox_4">
+			<p id="textbox_4" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+
+          <div id="colorbox_5"  class="legendbox_5">
+	        <div id="box_5" class="cbox_5">
+	        </div>
+	        <div id="text_5" class="tbox_5">
+			<p id="textbox_5" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>
+
+          <div id="colorbox_6"  class="legendbox_6">
+	        <div id="box_6" class="cbox_6">
+	        </div>
+	        <div id="text_6" class="tbox_6">
+			<p id="textbox_6" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div>	
+ 
+          <div id="colorbox_7"  class="legendbox_7">
+	        <div id="box_7" class="cbox_7">
+	        </div>
+	        <div id="text_7" class="tbox_7">
+			<p id="textbox_7" style="text-align:center;margin-top:5%;float:left;">dddd</p>
+	        </div>
+          </div> 
+      </div>	
 </body>
 </html>

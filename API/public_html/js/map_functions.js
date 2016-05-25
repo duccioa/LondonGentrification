@@ -5,6 +5,7 @@ function drawPolys(data, sw, z, stCol, fillOp, click) {
     // z: z-index
     // stCol: stroke color
     // fillOp: fill opacity
+    // add a click event?
 
     var polyArray = [];
     console.log('Drawing polygons for' + data);
@@ -64,7 +65,7 @@ function changeViz(vizAttribute, newValuesField) {
 // Set up the scatter plot map filtered by token
 function setupTokenMap(token) {
 
-    function loop() {
+    function loop() {// loop through functions to force order of execution
         var args = arguments;
         if (args.length <= 0)
             return;
@@ -120,6 +121,10 @@ function setupViz(viz) {
     }
     if (viz == 'lmoran') {
         field = token + '_morans_color';
+        return field;
+    } 
+    if (viz == 'clusters'){
+        field = 'cluster_colors';
         return field;
     } else {
         field = null;
@@ -202,7 +207,7 @@ function getData(lat_min, lng_min, lat_max, lng_max, token) {
 
                     //map.setCenter(new google.maps.LatLng(v.points.y, v.points.x));
                     $.getJSON("http://128.40.150.34:" + port + "/data/tokens_spatial/" + this.customInfo, function(data) {
-                        var content = "<b>" + v.BusinessName + "</b>" + "<br/><br/><b>Business ID: </b>" + v.BusinessID + "<br/><b>Business Type: </b> " + v.BusinessType + " <br/><b>Borough: </b> " + v.LocalAuthorityName + "<br/><b>Postcode:</b> " + v.PostCode + " <br/><b>Rating: </b>" + v.RatingValue;
+                        var content = "<b>" + v.BusinessName + "</b>" + "<br/><br/><b>Business ID: </b>" + v.BusinessID + "<br/><b>Business Type: </b> " + v.BusinessType + " <br/><b>Borough: </b> " + v.LocalAuthorityName + "<br/><b>Postcode:</b> " + v.PostCode + " <br/><b>Hygiene rating: </b>" + v.RatingValue;
                         infowindow.setContent(content);
                     });
 

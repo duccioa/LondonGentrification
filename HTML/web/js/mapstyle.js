@@ -236,24 +236,66 @@ var darkMap = [
         ]
     },
     {
-        "featureType": "water",
-        "elementType": "geometry",
+        "featureType": "all",
+        "elementType": "labels.text",
         "stylers": [
             {
-                "color": "#2D333C"
+                "visibility": "off"
             }
         ]
     },
     {
-    "elementType": "labels.text",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },
-  {
-    "elementType": "labels.icon",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  }
-]		
+        "featureType": "all",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#6cadf3"
+            }
+        ]
+    }
+]

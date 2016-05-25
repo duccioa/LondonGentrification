@@ -8,6 +8,7 @@ $(function () {
 
         },
 
+
         title: {
             text: 'Box Plot for Tokens with Income Estimate'
         },
@@ -27,38 +28,46 @@ $(function () {
             title: {
                 text: 'Income Estimate'
             },
-            plotLines: [{
-                value: 38200,
-                color: 'red',
-                width: 1,
-                label: {
-                    text: 'Median Income: £38200',
-                    align: 'center',
-                    style: {
-                        color: 'gray'
-                    }
-                }
-            }]
 
         },
+colors: [
+'#9FC54D',
+'#75C156',
+'#33A457',
+'#1EA86C',
+'#71B67B',
+'#61BDF0',
+'#1E71B8',
+'#E03C00',
+'#E56000',
+'#F08C00',
+'#FFEA00',
+'#729F1E',
+'#EE7A01',
+'#0053A0',
+'#02C070'
+],
+ 	    plotOptions: {
+	    	boxplot: {
+                // Enabling this option overrides the fillColor property
+                colorByPoint: true,
+	    		fillColor:'#F0F0E0',
+           lineWidth: 3,
 
-       plotOptions: {
-            boxplot: {
-                fillColor: '#F0F0E0',
-                lineWidth: 2,
-                medianColor: '#0C5DA5',
-                medianWidth: 3,
-                stemColor: '#A63400',
+                medianWidth: 4,
+
                 stemDashStyle: 'dot',
-                stemWidth: 1,
-                whiskerColor: '#3D9200',
-                whiskerLength: '50%',
-                whiskerWidth: 2
-            }
-        },
+                stemWidth: 2,
+
+                whiskerLength: '20%',
+                whiskerWidth: 4
+
+	    	}
+	    },
+
 
         series: [{
-            name: 'Household Income Estimate by Wards 2012-2013',
+            name: 'Income Estimate by Wards',
             data: [
             		[25090,34670,38755,43920,88330],
                 [25800,35840,40340,48090,88330],
@@ -99,6 +108,7 @@ $(function () {
 
     });
 });
+
 
 /////////////////////// TREEMAP //////////////////////////////
 $(function () {
@@ -319,7 +329,7 @@ $(function () {
             text: 'Click points to drill down. Source: <a href="http://ratings.food.gov.uk">Food Standards Agency</a>.'
         },
         title: {
-            text: 'Large Tree Map for Token Distribution by High and Low Income'
+            text: 'Tree Map for Token Distribution by High and Low Income'
         }
     });
 });
@@ -339,7 +349,7 @@ $(function () {
             }
         },
         title: {
-            text: 'Top 50 Meaningful Tokens'
+            text: 'Top 50 Most Frequent Tokens'
         },
         subtitle: {
             text: 'Source: <a href="http://ratings.food.gov.uk">Food Standard Agency</a>'
