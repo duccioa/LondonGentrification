@@ -151,7 +151,7 @@ function plotclick()
 			$("#textbox_3").text("£43k - £52k");
 			$("#textbox_4").text("£52k - £61k");
 			$("#textbox_5").text("£61k - £70k");
-			$("#textbox_6").text("£70k - £79k");
+			$("#textbox_6").text("More than £70k");
 			$("#textbox_7").text();
 			document.getElementById("textbox_5").style.color="white";
 			document.getElementById("textbox_6").style.color="white";

@@ -1,7 +1,10 @@
 import geopandas as gp
 import pandas as pd
-
+import numpy as np
 # Add all the relevant features to the wards shapefile and export it to GeoJson for the visualisation on ggoglemap
+
+import os
+os.chdir("C:/Users/Claire/Google Drive/LondonGentrification")
 
 wards=gp.GeoDataFrame.from_file("./Data/ESRI/Simplified/London_Ward_CityMerged_WGS84.shp") #from shapefile to GeoDataFrame
 geometry = gp.GeoSeries(wards['geometry'])

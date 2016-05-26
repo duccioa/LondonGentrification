@@ -4,9 +4,7 @@
 //  Author:  Adapted from original code by Steven Gray
 //  Description:  This API connects to a database containing food premises in London and visualises them on a map with the possibility of filtering the premises' names by the words they contains
 
-//  Notes:        This API assumes you have an SQL function called DISTANCE defined which can be created by running the following query in MySQL:
 
-//  CREATE FUNCTION distance(a POINT, b POINT) RETURNS double DETERMINISTIC RETURN ifnull(acos(sin(X(a)) * sin(X(b)) + cos(X(a)) * cos(X(b)) * cos(Y(b) - Y(a))) * 6380, 0)
 
 var moment = require('moment');
 
@@ -40,7 +38,7 @@ app.get('/', function(req, res) {
 })
 
 
-//  API EndPoint to get data from specific area - /data/51.1/0.0/30 
+//  API EndPoint to get data from specific area - /data/51.1/0.0/51.2/2/cafe 
 app.get('/data/tokens_spatial/:lat_min/:lon_min/:lat_max/:lon_max/:token/', function(req, res) {
 
     // Alows data to be downloaded from the server with security concerns
@@ -59,7 +57,6 @@ app.get('/data/tokens_spatial/:lat_min/:lon_min/:lat_max/:lon_max/:token/', func
 
 
         // SQL Statement to run
-        //var sql = "SELECT * FROM tokens_spatial WHERE DISTANCE(points, POINT("+lon+","+lat+") ) <= " + radius;
         var sql = "SELECT * FROM tokens_spatial AS t WHERE t.lat >= " + lat_min + " AND t.lat <= " + lat_max + " AND t.lon >= " + lon_min + " AND t.lon <= " + lon_max + "AND t.Token IN (\"" + token + "\");";
 
 

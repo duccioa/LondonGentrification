@@ -6,7 +6,8 @@
    <meta name="keywords" content="HTML, CSS, Javascript">
    <title>London Gentrification</title>
    <link rel="stylesheet" type="text/css" href="./css/style.css" />
-   <link rel="stylesheet" type="text/css" href="./css/highcharts.css" />
+    <link rel="stylesheet" type="text/css" href="./css/highcharts.css" />
+
    <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.2.min.js?ver=1.10.2'></script>
    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7UJ1JbKnBvycoS-SATXKgf7HwUdxWPZA&libraries=visualization"> </script>
    <script type='text/javascript' src='http://arshaw.com/xdate/downloads/0.8/xdate.js'></script>
@@ -14,12 +15,13 @@
    <script type="text/javascript"  src="./js/effect.js"></script>
    <script type="text/javascript" src="./js/modernizr_custom_29473.js"></script>
    <script type="text/javascript" src="./js/map_functions.js"></script>
-   <script src="https://code.highcharts.com/highcharts.js"></script>
-   <script src="https://code.highcharts.com/highcharts-more.js"></script>
-<script src="https://code.highcharts.com/modules/heatmap.js"></script>
-<script src="https://code.highcharts.com/modules/treemap.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script type="text/javascript" src="./js/highcharts.js"></script>
+		<script type='text/javascript' src="https://code.highcharts.com/highcharts.js"></script>
+   <script type='text/javascript' src="https://code.highcharts.com/highcharts-more.js"></script>
+<script type='text/javascript' src="https://code.highcharts.com/modules/heatmap.js"></script>
+<script type='text/javascript' src="https://code.highcharts.com/modules/treemap.js"></script>
+<script type='text/javascript' src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
    <style>
       html, body {
       height: 100%;
@@ -395,7 +397,8 @@
 	  $("#classif_btn").click( function(event){
 	    legendclick(4);
          classif_btn.style.backgroundColor="#383434";
-         
+		  document.getElementById("map-title-top").innerHTML = "Neighbourhoods";
+          document.getElementById("token-title").innerHTML = "";
          var viz = 'clusters';
          var link2description = './text/'+viz+'_description.html';
          var link2analysis = './text/clusters_analysis.html';
@@ -458,7 +461,7 @@
 		<input name="button1" type="button" value="The Project" class="button description" onclick=button1();>
         <input name="button2" type="button" value="Methodology" class="button methodology" onclick=button2();>
 		<input name="button3" type="button" value="The Team" class="button graphs" onclick=button3();>
-        <input name="button4" type="button" value="Data Sources" class="button data" onclick=button4();>
+        <input name="button4" type="button" value="Data" class="button data" onclick=button4();>
 
 		</div>
 		
@@ -605,7 +608,7 @@
 		   </script>
 	  
       <div id="dynamic title" class="dtitle">
-	  <p>Token (word) displayed:</p>
+	  <p id="map-title-top">Token (word) displayed:</p>
 	  <p id="token-title">Cafe</p>
       </div>	
 
