@@ -65,7 +65,7 @@ function changeViz(vizAttribute, newValuesField) {
 // Set up the scatter plot map filtered by token
 function setupTokenMap(token) {
 
-    function loop() {// loop through functions to force order of execution
+    function loop() { // loop through functions to force order of execution
         var args = arguments;
         if (args.length <= 0)
             return;
@@ -122,8 +122,8 @@ function setupViz(viz) {
     if (viz == 'lmoran') {
         field = token + '_morans_color';
         return field;
-    } 
-    if (viz == 'clusters'){
+    }
+    if (viz == 'clusters') {
         field = 'cluster_colors';
         return field;
     } else {

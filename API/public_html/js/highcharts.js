@@ -1,6 +1,5 @@
 /////////////////////// BOXPLOT //////////////////////////////
-
-$(function () {
+$(function() {
     $('#box_plot').highcharts({
 
         chart: {
@@ -18,7 +17,7 @@ $(function () {
         },
 
         xAxis: {
-            categories: ['cafe','coffee','pizza','grill','wine','sushi','thai','chicken','fried','fish','kebab','waitrose','sainsbury','tesco','costcutter'],
+            categories: ['cafe', 'coffee', 'pizza', 'grill', 'wine', 'sushi', 'thai', 'chicken', 'fried', 'fish', 'kebab', 'waitrose', 'sainsbury', 'tesco', 'costcutter'],
             title: {
                 text: 'Tokens'
             }
@@ -30,29 +29,29 @@ $(function () {
             },
 
         },
-colors: [
-'#9FC54D',
-'#75C156',
-'#33A457',
-'#1EA86C',
-'#71B67B',
-'#61BDF0',
-'#1E71B8',
-'#E03C00',
-'#E56000',
-'#F08C00',
-'#FFEA00',
-'#729F1E',
-'#EE7A01',
-'#0053A0',
-'#02C070'
-],
- 	    plotOptions: {
-	    	boxplot: {
+        colors: [
+            '#9FC54D',
+            '#75C156',
+            '#33A457',
+            '#1EA86C',
+            '#71B67B',
+            '#61BDF0',
+            '#1E71B8',
+            '#E03C00',
+            '#E56000',
+            '#F08C00',
+            '#FFEA00',
+            '#729F1E',
+            '#EE7A01',
+            '#0053A0',
+            '#02C070'
+        ],
+        plotOptions: {
+            boxplot: {
                 // Enabling this option overrides the fillColor property
                 colorByPoint: true,
-	    		fillColor:'#F0F0E0',
-           lineWidth: 3,
+                fillColor: '#F0F0E0',
+                lineWidth: 3,
 
                 medianWidth: 4,
 
@@ -62,28 +61,28 @@ colors: [
                 whiskerLength: '20%',
                 whiskerWidth: 4
 
-	    	}
-	    },
+            }
+        },
 
 
         series: [{
             name: 'Income Estimate by Wards',
             data: [
-            		[25090,34670,38755,43920,88330],
-                [25800,35840,40340,48090,88330],
-                [25090,33580,38090,43790,65500],
-                [26290,33820,37600,43120,64320],
-                [25090,33530,37600,43320,65500],
-                [26010,37355,40615,50100,88330],
-                [30100,38410,43920,49290,65500],
-                [25090,31980,35130,39475,63620],
-                [25090,31840,35130,39405,62840],
-                [25090,33170,37940,42375,65500],
-                [25090,33000,36300,40340,64320],
-                [30320,40340,45410,50410,88330],
-                [25090,35670,40340,46210,65500],
-                [25800,34010,38090,43470,65500],
-                [26290,32930,37120,41230,58400]
+                [25090, 34670, 38755, 43920, 88330],
+                [25800, 35840, 40340, 48090, 88330],
+                [25090, 33580, 38090, 43790, 65500],
+                [26290, 33820, 37600, 43120, 64320],
+                [25090, 33530, 37600, 43320, 65500],
+                [26010, 37355, 40615, 50100, 88330],
+                [30100, 38410, 43920, 49290, 65500],
+                [25090, 31980, 35130, 39475, 63620],
+                [25090, 31840, 35130, 39405, 62840],
+                [25090, 33170, 37940, 42375, 65500],
+                [25090, 33000, 36300, 40340, 64320],
+                [30320, 40340, 45410, 50410, 88330],
+                [25090, 35670, 40340, 46210, 65500],
+                [25800, 34010, 38090, 43470, 65500],
+                [26290, 32930, 37120, 41230, 58400]
 
             ],
             tooltip: {
@@ -111,143 +110,143 @@ colors: [
 
 
 /////////////////////// TREEMAP //////////////////////////////
-$(function () {
+$(function() {
     var data = {
             'Cafe': {
                 'High Income Area': {
-                    'Token Count':'1385',
+                    'Token Count': '1385',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'1577',
+                    'Token Count': '1577',
                 }
-               },
-           'Coffe': {
+            },
+            'Coffe': {
                 'High Income Area': {
-                    'Token Count':'481',
+                    'Token Count': '481',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'347',
+                    'Token Count': '347',
                 }
-               },
+            },
 
-          'Pizza': {
+            'Pizza': {
                 'High Income Area': {
-                    'Token Count':'426',
+                    'Token Count': '426',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'573',
+                    'Token Count': '573',
                 }
-               },
+            },
 
-           'Grill': {
+            'Grill': {
                 'High Income Area': {
-                    'Token Count':'199',
+                    'Token Count': '199',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'305',
+                    'Token Count': '305',
                 }
-               },
+            },
 
             'Wine': {
                 'High Income Area': {
-                    'Token Count':'577',
+                    'Token Count': '577',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'818',
+                    'Token Count': '818',
                 }
-               },
+            },
 
-           'Sushi': {
+            'Sushi': {
                 'High Income Area': {
-                    'Token Count':'104',
+                    'Token Count': '104',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'62',
+                    'Token Count': '62',
                 }
-               },
+            },
 
 
             'Thai': {
                 'High Income Area': {
-                    'Token Count':'176',
+                    'Token Count': '176',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'80',
+                    'Token Count': '80',
                 }
-               },
+            },
 
             'Chicken': {
                 'High Income Area': {
-                    'Token Count':'213',
+                    'Token Count': '213',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'627',
+                    'Token Count': '627',
                 }
-               },
+            },
 
-             'Fried': {
+            'Fried': {
                 'High Income Area': {
-                    'Token Count':'73',
+                    'Token Count': '73',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'216',
+                    'Token Count': '216',
                 }
-               },
+            },
 
-             'Fish': {
+            'Fish': {
                 'High Income Area': {
-                    'Token Count':'356',
+                    'Token Count': '356',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'532',
+                    'Token Count': '532',
                 }
-               },
+            },
 
-             'Kebab': {
+            'Kebab': {
                 'High Income Area': {
-                    'Token Count':'170',
+                    'Token Count': '170',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'385',
+                    'Token Count': '385',
                 }
-               },
+            },
 
-             'Waitrose': {
+            'Waitrose': {
                 'High Income Area': {
-                    'Token Count':'69',
+                    'Token Count': '69',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'18',
+                    'Token Count': '18',
                 }
-               },
+            },
 
-             'Sainsbury': {
+            'Sainsbury': {
                 'High Income Area': {
-                    'Token Count':'168',
+                    'Token Count': '168',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'126',
+                    'Token Count': '126',
                 }
-               },
+            },
 
 
-              'Tesco': {
+            'Tesco': {
                 'High Income Area': {
-                    'Token Count':'199',
+                    'Token Count': '199',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'254',
+                    'Token Count': '254',
                 }
-               },
+            },
 
-              'Costcutter': {
+            'Costcutter': {
                 'High Income Area': {
-                    'Token Count':'60',
+                    'Token Count': '60',
                 },
                 'Low Incomde Area': {
-                    'Token Count':'110',
+                    'Token Count': '110',
                 }
-               },
+            },
 
 
 
@@ -264,7 +263,7 @@ $(function () {
         country,
         cause,
         causeName = {
-        'Token Count':'Token Count'
+            'Token Count': 'Token Count'
         };
 
     for (region in data) {
@@ -337,7 +336,7 @@ $(function () {
 
 
 /////////////////////// TOKEN FREQUENCY //////////////////////////////
-$(function () {
+$(function() {
     $('#token_frequency').highcharts({
         chart: {
             type: 'column',
@@ -360,82 +359,82 @@ $(function () {
             }
         },
 
-            xAxis: {
+        xAxis: {
 
-            type:'category',
+            type: 'category',
             labels: {
                 rotation: -45,
 
-                       style: {
+                style: {
                     fontSize: '15px',
                     fontFamily: 'Verdana, sans-serif'
 
                 }
             }
         },
-           yAxis: {
+        yAxis: {
             min: 0,
-            max:3000,
+            max: 3000,
             title: {
                 text: 'Tokens Frequency'
             }
         },
-          legend: {
+        legend: {
             enabled: false
         },
         series: [{
             name: 'Token Frequency',
             data: [
-                  ['cafe', 2912],
-                  ['food',1932 ],
-                  ['restaurant', 1916],
-                  ['bar', 1439],
-                  ['club', 1317],
-                  ['wine', 1181],
-                  ['pizza', 970],
-                  ['express', 895],
-                  ['kitchen', 818],
-                  ['chicken', 818],
-                  ['coffee', 813],
-                  ['hotel', 774],
-                  ['supermarket', 757],
-                  ['fish', 746],
-                  ['store', 623],
-                  ['catering', 535],
-                  ['shop',506],
-                  ['grill', 466],
-                  ['tesco', 445],
-                  ['kebab', 440],
-                  ['market', 385],
-                  ['royal', 348],
-                  ['halal', 336],
-                  ['bakery', 333],
-                  ['costa', 317],
-                  ['arms', 301],
-                  ['sainsbury', 294],
-                  ['fried', 289],
-                  ['hall', 277],
-                  ['chinese', 270],
-                  ['caffe', 268],
-                  ['tandoori', 247],
-                  ['spice', 243],
-                  ['local', 235],
-                  ['subway', 235],
-                  ['takeaway', 231],
-                  ['thai', 227],
-                  ['star', 212],
-                  ['butchers', 208],
-                  ['starbucks', 207],
-                  ['boots', 202],
-                  ['hut', 197],
-                  ['wines', 192],
-                  [ 'deli', 192],
-                  ['licence', 186],
-                  ['pret', 184],
-                  ['lounge', 182],
-                  ['indian', 179],
-                  ['greggs', 178],
-                  ['burger', 169],
+                ['cafe', 2912],
+                ['food', 1932],
+                ['restaurant', 1916],
+                ['bar', 1439],
+                ['club', 1317],
+                ['wine', 1181],
+                ['pizza', 970],
+                ['express', 895],
+                ['kitchen', 818],
+                ['chicken', 818],
+                ['coffee', 813],
+                ['hotel', 774],
+                ['supermarket', 757],
+                ['fish', 746],
+                ['store', 623],
+                ['catering', 535],
+                ['shop', 506],
+                ['grill', 466],
+                ['tesco', 445],
+                ['kebab', 440],
+                ['market', 385],
+                ['royal', 348],
+                ['halal', 336],
+                ['bakery', 333],
+                ['costa', 317],
+                ['arms', 301],
+                ['sainsbury', 294],
+                ['fried', 289],
+                ['hall', 277],
+                ['chinese', 270],
+                ['caffe', 268],
+                ['tandoori', 247],
+                ['spice', 243],
+                ['local', 235],
+                ['subway', 235],
+                ['takeaway', 231],
+                ['thai', 227],
+                ['star', 212],
+                ['butchers', 208],
+                ['starbucks', 207],
+                ['boots', 202],
+                ['hut', 197],
+                ['wines', 192],
+                ['deli', 192],
+                ['licence', 186],
+                ['pret', 184],
+                ['lounge', 182],
+                ['indian', 179],
+                ['greggs', 178],
+                ['burger', 169],
             ],
             dataLabels: {
                 enabled: false,
